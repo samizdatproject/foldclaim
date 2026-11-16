@@ -1,0 +1,72 @@
+[
+  {
+    "depth": 9,
+    "maxLeaves": 512,
+    "txBytes": 5462,
+    "unlockingBytes": 3692,
+    "accepted": true,
+    "feeSatsAt1SatPerByte": 5462,
+    "randomIndex": 244,
+    "randomIndexClaim": {
+      "accepted": true,
+      "txBytes": 5400,
+      "unlockingBytes": 3692
+    }
+  },
+  {
+    "depth": 12,
+    "maxLeaves": 4096,
+    "txBytes": 5558,
+    "unlockingBytes": 3788,
+    "accepted": true,
+    "feeSatsAt1SatPerByte": 5558,
+    "randomIndex": 61,
+    "randomIndexClaim": {
+      "accepted": true,
+      "txBytes": 5495,
+      "unlockingBytes": 3787
+    }
+  },
+  {
+    "depth": 16,
+    "maxLeaves": 65536,
+    "txBytes": 5687,
+    "unlockingBytes": 3917,
+    "accepted": true,
+    "feeSatsAt1SatPerByte": 5687,
+    "randomIndex": 13898,
+    "randomIndexClaim": {
+      "accepted": true,
+      "txBytes": 5624,
+      "unlockingBytes": 3916
+    }
+  },
+  {
+    "depth": 20,
+    "maxLeaves": 1048576,
+    "txBytes": 5815,
+    "unlockingBytes": 4045,
+    "accepted": true,
+    "feeSatsAt1SatPerByte": 5815,
+    "randomIndex": 219889,
+    "randomIndexClaim": {
+      "accepted": true,
+      "txBytes": 5753,
+      "unlockingBytes": 4045
+    }
+  },
+  {
+    "depth": 24,
+    "maxLeaves": 16777216,
+    "txBytes": 5944,
+    "unlockingBytes": 4174,
+    "accepted": true,
+    "feeSatsAt1SatPerByte": 5944,
+    "randomIndex": 337413,
+    "randomIndexClaim": {
+      "accepted": true,
+      "txBytes": 5881,
+      "unlockingBytes": 4173
+    }
+  }
+]
