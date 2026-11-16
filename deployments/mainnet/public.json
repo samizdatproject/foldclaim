@@ -1,0 +1,67 @@
+{
+  "network": "mainnet",
+  "operatorPublicKey": "028241d2181e00aedf00057348e586322013304bc7a33cda76042dd5e2ea9681ab",
+  "operatorAddress": "bitcoincash:qz0td56ndjs8snhmmzyp5g4a4vudmvl7vuxr2vsdyd",
+  "demoRecipients": [
+    {
+      "demo": 0,
+      "leafIndex": 0,
+      "address": "bitcoincash:zpvlc85v2zy2mk0y2zpkmg04m2kmkyta4ut5w8s9jc",
+      "cashAddress": "bitcoincash:qpvlc85v2zy2mk0y2zpkmg04m2kmkyta4uv7ae7rdt"
+    },
+    {
+      "demo": 1,
+      "leafIndex": 1,
+      "address": "bitcoincash:zr37yxt2jjzlqw9vv45utmkus7gqrlnzpsyrfz6mda",
+      "cashAddress": "bitcoincash:qr37yxt2jjzlqw9vv45utmkus7gqrlnzpsrf6u5ajw"
+    },
+    {
+      "demo": 2,
+      "leafIndex": 42,
+      "address": "bitcoincash:zphsqcyje269plc6xyq3qz4x0ae4rzu0c5jw0q687m",
+      "cashAddress": "bitcoincash:qphsqcyje269plc6xyq3qz4x0ae4rzu0c54yu75ppg"
+    },
+    {
+      "demo": 3,
+      "leafIndex": 99,
+      "address": "bitcoincash:zp5z7r27gwqypyg9gpw2tvq0yp0kqppyeysglges9g",
+      "cashAddress": "bitcoincash:qp5z7r27gwqypyg9gpw2tvq0yp0kqppyeyhzvkhk6m"
+    },
+    {
+      "demo": 4,
+      "leafIndex": 150,
+      "address": "bitcoincash:zz5hmgtne7pdj30p5ga5c7c99gpq738w5sh0rujfjd",
+      "cashAddress": "bitcoincash:qz5hmgtne7pdj30p5ga5c7c99gpq738w5ss9szu0d7"
+    },
+    {
+      "demo": 5,
+      "leafIndex": 151,
+      "address": "bitcoincash:zqzj0r9ry42pj075lmugqnt3a23483p3yyz7yj6u0a",
+      "cashAddress": "bitcoincash:qqzj0r9ry42pj075lmugqnt3a23483p3yy95hv56sw"
+    },
+    {
+      "demo": 6,
+      "leafIndex": 200,
+      "address": "bitcoincash:zptg2w52c0avsfh4fkflxxmnux7tpr54ky7gnhutne",
+      "cashAddress": "bitcoincash:qptg2w52c0avsfh4fkflxxmnux7tpr54kyezqfjdv2"
+    },
+    {
+      "demo": 7,
+      "leafIndex": 255,
+      "address": "bitcoincash:zrr0h693twgeuw302fu3ju6l38y7ju82wqv4rcu55l",
+      "cashAddress": "bitcoincash:qrr0h693twgeuw302fu3ju6l38y7ju82wqtlsxjjtv"
+    },
+    {
+      "demo": 8,
+      "leafIndex": 256,
+      "address": "bitcoincash:zrtd9mdhqawq4fyq2mxgrmcqnh949l57rggr53wd34",
+      "cashAddress": "bitcoincash:qrtd9mdhqawq4fyq2mxgrmcqnh949l57rg0f80qtwx"
+    },
+    {
+      "demo": 9,
+      "leafIndex": 299,
+      "address": "bitcoincash:zzpq79svrqrj7wgk8rfq3qtvu0j6ezle3ur2t7srxj",
+      "cashAddress": "bitcoincash:qzpq79svrqrj7wgk8rfq3qtvu0j6ezle3uyqcq79ep"
+    }
+  ]
+}
