@@ -128,13 +128,26 @@ describe('RootRegistry', () => {
       .not.toBe('accepted');
   });
 
-  it('does not let the pool sync while a root is pending (no one can reset the audit timer)', async () => {
+  it('syncs only the active root: a pending root is never copied and its audit timer keeps running', async () => {
     const ctx = await setup(8);
     const t1 = new MerkleTree(ctx.entries);
-    await publish(ctx, t1, 1n);
+    await ctx.registry.connect(ctx.operator).call.proposeRoot(sig(ctx.operator), t1.root, 1n).send();
+    // nothing active yet: a sync has nothing to copy
+    expect(await outcome(ctx.pool.connect(ctx.mallory).call.syncRoot().send())).not.toBe('accepted');
+    await ctx.provider.mine(ROOT_DELAY + 2);
+    await activate(ctx);
+    // epoch 2 is proposed before anyone syncs epoch 1; a sync still copies the ACTIVE epoch-1 root
     const t2 = new MerkleTree(ctx.entries.map((e) => ({ ...e, cumulative: e.cumulative + 1n })));
     await ctx.registry.connect(ctx.operator).call.proposeRoot(sig(ctx.operator), t2.root, 2n).send();
-    expect(await outcome(ctx.pool.connect(ctx.mallory).call.syncRoot().send())).not.toBe('accepted');
+    await ctx.pool.connect(ctx.mallory).call.syncRoot().send();
+    const pool = await ctx.pool.getState();
+    expect(binToHex(pool.root)).toBe(binToHex(t1.root));
+    expect(pool.epoch).toBe(1n);
+    // a third party's sync did not reset the registry's window: epoch 2 still activates on schedule
+    expect(await outcome(activate(ctx))).not.toBe('accepted');
+    await ctx.provider.mine(ROOT_DELAY + 2);
+    expect(await outcome(activate(ctx))).toBe('accepted');
+    expect(await outcome(claim(ctx, ctx.mallory, t1, 0))).toBe('accepted');
   });
 });
 
@@ -167,6 +180,8 @@ describe('FoldClaimPool claims', () => {
     expect(await outcome(claim(ctx, ctx.mallory, tree, 1, { index: 3n }))).not.toBe('accepted');
     // An index beyond the tree.
     expect(await outcome(claim(ctx, ctx.mallory, tree, 1, { index: 1n + 512n }))).not.toBe('accepted');
+    // negative index (would otherwise walk the same path as its positive twin)
+    expect(await outcome(claim(ctx, ctx.mallory, tree, 1, { index: -1n }))).toMatch(/negative index/);
     // A truncated proof.
     expect(await outcome(claim(ctx, ctx.mallory, tree, 1, { proof: tree.proof(1).proofBytes.slice(0, 64) }))).not.toBe('accepted');
     // Another token category.
@@ -191,7 +206,7 @@ describe('FoldClaimPool claims', () => {
     expect(await tokensOf(ctx, e2[1].lockingBytecode)).toBe(12_445n);
   });
 
-  it('measures claim transaction sizes for the cost comparison', async () => {
+  it('measures claim transaction sizes for the cost comparison', { timeout: 600_000 }, async () => {
     const ctx = await setup(300);
     const tree = new MerkleTree(ctx.entries);
     await publish(ctx, tree, 1n);

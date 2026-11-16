@@ -1,0 +1,199 @@
+{
+  "waits": [
+    146,
+    163
+  ],
+  "spent": "136191",
+  "budget": "200000",
+  "txs": {
+    "registry-coin": {
+      "txid": "d3b193286dc2ec59ba1f83b5fd52fbea8a44eb85b597598a8aa3ae8a0a5eb53e",
+      "bytes": 219,
+      "spent": "241"
+    },
+    "registry-deploy": {
+      "txid": "ed0fe655d32b224787dc828e2f6bc150a1da425e06edc8aaa6260c4e0cb9cfe0",
+      "bytes": 595,
+      "spent": "5951"
+    },
+    "propose1": {
+      "txid": "6f8cb360e358af293f55beec38edff81a450c62b2755f2e175921c1f37aecbae",
+      "bytes": 3179,
+      "spent": "3228"
+    },
+    "token-coin": {
+      "txid": "81e6017712b982fd85fb22f11b71efd7627192edaf435e62ff1c417153318b88",
+      "bytes": 219,
+      "spent": "241"
+    },
+    "token-genesis": {
+      "txid": "f1b919f8c610e86acbe47912160e0015e93bd2036c4c1c5d466c84f56361972a",
+      "bytes": 258,
+      "spent": "284"
+    },
+    "pool-coin": {
+      "txid": "688b85a5513667bfb733d7eb47e2ae9faab22ec80f99328c0cafb86a2dfffe1b",
+      "bytes": 219,
+      "spent": "241"
+    },
+    "pool-deploy": {
+      "txid": "d21793333d28c2ccf8a0502d7c2201c8861dec93e376c1a3144e8b60d6e58991",
+      "bytes": 911,
+      "spent": "7467"
+    },
+    "activate1": {
+      "txid": "61c09979db7b38849206bc9ca08b7ee0a0e16fd5c6b4b330dd07bbc47a27e620",
+      "bytes": 3079,
+      "spent": "3128"
+    },
+    "sync1": {
+      "txid": "4aa37a33886b1af9ee6713b70ee584ed87536d8dfa3da2c056516bbfee4de4ee",
+      "bytes": 4397,
+      "spent": "4446"
+    },
+    "claim1-0": {
+      "txid": "c6a2acec7fe2e427869060db20eb6fb497f7d336c46ff21ad33c3aa841e801c9",
+      "bytes": 5460,
+      "spent": "8050"
+    },
+    "claim1-1": {
+      "txid": "578edfaab8cee3f27e5678f0f11a4f343f70adf8c165a8ba97bc1d52edfdb54a",
+      "bytes": 5460,
+      "spent": "8050"
+    },
+    "claim1-2": {
+      "txid": "b75b98cb8e77362f29add36ec7742bf380be73ba09e3d4f2e010b9b62f81ed8c",
+      "bytes": 5463,
+      "spent": "8053"
+    },
+    "claim1-3": {
+      "txid": "3ac0ea581ae6ccf660929b583402723b2912c343dcb7ef9a3071f212f3674a4e",
+      "bytes": 5401,
+      "spent": "8991"
+    },
+    "claim1-4": {
+      "txid": "08605293cccad1b501e99dd95acb78d7dd5c9d7ec71986387cefb723dd8b8a6c",
+      "bytes": 5464,
+      "spent": "9054"
+    },
+    "claim1-5": {
+      "txid": "fdb305cfcb30e4dc6eee0bab8c841caac830a436e65a41ec9d1db8c88c784e1e",
+      "bytes": 5403,
+      "spent": "8993"
+    },
+    "claim1-6": {
+      "txid": "bad5b2be27642744c3ed9f799c093d3189ac0a42c4ba2c7178ee896f0c75b89a",
+      "bytes": 5403,
+      "spent": "8993"
+    },
+    "claim1-7": {
+      "txid": "9dc1b5101a06c94ffdd9b9fde3c26db410797deffff88f1e1fd00f3bb025d598",
+      "bytes": 5401,
+      "spent": "8991"
+    },
+    "claim1-8": {
+      "txid": "e005126d1cfde1fd1546c7b92c294954b3f011f5a3fcb288972546914eaabf61",
+      "bytes": 5400,
+      "spent": "8990"
+    },
+    "claim1-9": {
+      "txid": "829b1eb34dfeb575bea859757136d338bcaab9233722188ff8c610988ce3b299",
+      "bytes": 5401,
+      "spent": "8991"
+    },
+    "propose2": {
+      "txid": "fbe6dc3bbb71f0957b07d9d89889b115b473b547a44bde78d729187b560536fb",
+      "bytes": 3179,
+      "spent": "3228"
+    },
+    "activate2": {
+      "txid": "5b096209beb579947378220c2d0074f6747d0e52f96d7a82ea4374952985300d",
+      "bytes": 3079,
+      "spent": "3128"
+    },
+    "sync2": {
+      "txid": "fade8e039782426743cb3fb66dfd8307c3fceb290cbf520a3da06b2649cff10f",
+      "bytes": 4397,
+      "spent": "4446"
+    },
+    "claim2-0": {
+      "txid": "c7f9aa0753f6b186177834d26630c20171a9a90c3ab23f229c462a733e2fe283",
+      "bytes": 5112,
+      "spent": "6502"
+    },
+    "claim2-9": {
+      "txid": "b8c787095e3616060a0e3fee3848b8a84598a9bbfdf25b2a3e8fac39b5270ca1",
+      "bytes": 5114,
+      "spent": "6504"
+    }
+  },
+  "log": [
+    "registry-coin: d3b193286dc2ec59ba1f83b5fd52fbea8a44eb85b597598a8aa3ae8a0a5eb53e  (219 bytes, operator spent 241 sats)",
+    "registry-deploy: ed0fe655d32b224787dc828e2f6bc150a1da425e06edc8aaa6260c4e0cb9cfe0  (595 bytes, operator spent 5951 sats)",
+    "propose1: 6f8cb360e358af293f55beec38edff81a450c62b2755f2e175921c1f37aecbae  (3179 bytes, operator spent 3228 sats)",
+    "token-coin: 81e6017712b982fd85fb22f11b71efd7627192edaf435e62ff1c417153318b88  (219 bytes, operator spent 241 sats)",
+    "token-genesis: f1b919f8c610e86acbe47912160e0015e93bd2036c4c1c5d466c84f56361972a  (258 bytes, operator spent 284 sats)",
+    "pool-coin: 688b85a5513667bfb733d7eb47e2ae9faab22ec80f99328c0cafb86a2dfffe1b  (219 bytes, operator spent 241 sats)",
+    "pool-deploy: d21793333d28c2ccf8a0502d7c2201c8861dec93e376c1a3144e8b60d6e58991  (911 bytes, operator spent 7467 sats)",
+    "activate1 +0: non-BIP68-final",
+    "activate1 +1: non-BIP68-final",
+    "activate1: 61c09979db7b38849206bc9ca08b7ee0a0e16fd5c6b4b330dd07bbc47a27e620  (3079 bytes, operator spent 3128 sats)",
+    "sync1: 4aa37a33886b1af9ee6713b70ee584ed87536d8dfa3da2c056516bbfee4de4ee  (4397 bytes, operator spent 4446 sats)",
+    "claim1-0: c6a2acec7fe2e427869060db20eb6fb497f7d336c46ff21ad33c3aa841e801c9  (5460 bytes, operator spent 8050 sats)",
+    "claim1-1: 578edfaab8cee3f27e5678f0f11a4f343f70adf8c165a8ba97bc1d52edfdb54a  (5460 bytes, operator spent 8050 sats)",
+    "claim1-2: b75b98cb8e77362f29add36ec7742bf380be73ba09e3d4f2e010b9b62f81ed8c  (5463 bytes, operator spent 8053 sats)",
+    "claim1-3: 3ac0ea581ae6ccf660929b583402723b2912c343dcb7ef9a3071f212f3674a4e  (5401 bytes, operator spent 8991 sats)",
+    "claim1-4: 08605293cccad1b501e99dd95acb78d7dd5c9d7ec71986387cefb723dd8b8a6c  (5464 bytes, operator spent 9054 sats)",
+    "claim1-5: fdb305cfcb30e4dc6eee0bab8c841caac830a436e65a41ec9d1db8c88c784e1e  (5403 bytes, operator spent 8993 sats)",
+    "claim1-6: bad5b2be27642744c3ed9f799c093d3189ac0a42c4ba2c7178ee896f0c75b89a  (5403 bytes, operator spent 8993 sats)",
+    "claim1-7: 9dc1b5101a06c94ffdd9b9fde3c26db410797deffff88f1e1fd00f3bb025d598  (5401 bytes, operator spent 8991 sats)",
+    "claim1-8: e005126d1cfde1fd1546c7b92c294954b3f011f5a3fcb288972546914eaabf61  (5400 bytes, operator spent 8990 sats)",
+    "claim1-9: 829b1eb34dfeb575bea859757136d338bcaab9233722188ff8c610988ce3b299  (5401 bytes, operator spent 8991 sats)",
+    "propose2: fbe6dc3bbb71f0957b07d9d89889b115b473b547a44bde78d729187b560536fb  (3179 bytes, operator spent 3228 sats)",
+    "activate2 +0: non-BIP68-final",
+    "activate2 +1: non-BIP68-final",
+    "activate2 +2: non-BIP68-final",
+    "activate2 +3: non-BIP68-final",
+    "activate2 +4: non-BIP68-final",
+    "activate2 +5: non-BIP68-final",
+    "activate2 +6: non-BIP68-final",
+    "activate2 +7: non-BIP68-final",
+    "activate2 +8: non-BIP68-final",
+    "activate2 +9: non-BIP68-final",
+    "activate2 +10: non-BIP68-final",
+    "activate2 +11: non-BIP68-final",
+    "activate2 +12: non-BIP68-final",
+    "activate2 +13: non-BIP68-final",
+    "activate2 +14: non-BIP68-final",
+    "activate2 +15: non-BIP68-final",
+    "activate2 +16: non-BIP68-final",
+    "activate2 +17: non-BIP68-final",
+    "activate2 +18: non-BIP68-final",
+    "activate2: 5b096209beb579947378220c2d0074f6747d0e52f96d7a82ea4374952985300d  (3079 bytes, operator spent 3128 sats)",
+    "sync2: fade8e039782426743cb3fb66dfd8307c3fceb290cbf520a3da06b2649cff10f  (4397 bytes, operator spent 4446 sats)",
+    "claim2-0: c7f9aa0753f6b186177834d26630c20171a9a90c3ab23f229c462a733e2fe283  (5112 bytes, operator spent 6502 sats)",
+    "claim2-9: b8c787095e3616060a0e3fee3848b8a84598a9bbfdf25b2a3e8fac39b5270ca1  (5114 bytes, operator spent 6504 sats)",
+    "operator bchtest:qp6ufc7jcs2txqe8zsx8el4l7m7mpcgx8uvk7dz7se  balance 63809 sats  height 134009",
+    "  registry: {\"categoryId\":\"d3b193286dc2ec59ba1f83b5fd52fbea8a44eb85b597598a8aa3ae8a0a5eb53e\",\"lockingBytecode\":\"aa20a52afafbd1595106bddf9c5e35d78bdfaf8c8a36c118b6a6996250f71f904ded87\"}",
+    "  propose1: {\"root\":\"7d4a4f465d8a7562eb0e4fcbd025198e6d526e81a09d610d57f459bcc25171b8\",\"treeFile\":\"/var/folders/pj/c5qc4bks133g8frr_dlsscpw0000gn/T/foldclaim-SoVxdK/tree-epoch1.json\",\"txid\":\"6f8cb360e358af293f55beec38edff81a450c62b2755f2e175921c1f37aecbae\",\"height\":133700}",
+    "  token: {\"category\":\"81e6017712b982fd85fb22f11b71efd7627192edaf435e62ff1c417153318b88\"}",
+    "  pool: {\"categoryId\":\"688b85a5513667bfb733d7eb47e2ae9faab22ec80f99328c0cafb86a2dfffe1b\"}",
+    "  activate1: {\"height\":133846}",
+    "  sync1: {\"height\":133846}",
+    "  claim1-0: {\"index\":0,\"cumulative\":\"1000\",\"txid\":\"c6a2acec7fe2e427869060db20eb6fb497f7d336c46ff21ad33c3aa841e801c9\"}",
+    "  claim1-1: {\"index\":1,\"cumulative\":\"8919\",\"txid\":\"578edfaab8cee3f27e5678f0f11a4f343f70adf8c165a8ba97bc1d52edfdb54a\"}",
+    "  claim1-2: {\"index\":42,\"cumulative\":\"33598\",\"txid\":\"b75b98cb8e77362f29add36ec7742bf380be73ba09e3d4f2e010b9b62f81ed8c\"}",
+    "  claim1-3: {\"index\":99,\"cumulative\":\"34981\",\"txid\":\"3ac0ea581ae6ccf660929b583402723b2912c343dcb7ef9a3071f212f3674a4e\"}",
+    "  claim1-4: {\"index\":150,\"cumulative\":\"38850\",\"txid\":\"08605293cccad1b501e99dd95acb78d7dd5c9d7ec71986387cefb723dd8b8a6c\"}",
+    "  claim1-5: {\"index\":151,\"cumulative\":\"46769\",\"txid\":\"fdb305cfcb30e4dc6eee0bab8c841caac830a436e65a41ec9d1db8c88c784e1e\"}",
+    "  claim1-6: {\"index\":200,\"cumulative\":\"34800\",\"txid\":\"bad5b2be27642744c3ed9f799c093d3189ac0a42c4ba2c7178ee896f0c75b89a\"}",
+    "  claim1-7: {\"index\":255,\"cumulative\":\"20345\",\"txid\":\"9dc1b5101a06c94ffdd9b9fde3c26db410797deffff88f1e1fd00f3bb025d598\"}",
+    "  claim1-8: {\"index\":256,\"cumulative\":\"28264\",\"txid\":\"e005126d1cfde1fd1546c7b92c294954b3f011f5a3fcb288972546914eaabf61\"}",
+    "  claim1-9: {\"index\":299,\"cumulative\":\"18781\",\"txid\":\"829b1eb34dfeb575bea859757136d338bcaab9233722188ff8c610988ce3b299\"}",
+    "  propose2: {\"root\":\"916c0d7a39c756898de85801ab4d7a8e303a2ae1bd9a579c85f4bac071f785d5\",\"treeFile\":\"/var/folders/pj/c5qc4bks133g8frr_dlsscpw0000gn/T/foldclaim-SoVxdK/tree-epoch2.json\",\"txid\":\"fbe6dc3bbb71f0957b07d9d89889b115b473b547a44bde78d729187b560536fb\",\"height\":133846}",
+    "  activate2: {\"height\":134009}",
+    "  sync2: {\"height\":134009}",
+    "  claim2-0: {\"index\":0,\"cumulative\":\"1500\",\"txid\":\"c7f9aa0753f6b186177834d26630c20171a9a90c3ab23f229c462a733e2fe283\"}",
+    "  claim2-9: {\"index\":299,\"cumulative\":\"19281\",\"txid\":\"b8c787095e3616060a0e3fee3848b8a84598a9bbfdf25b2a3e8fac39b5270ca1\"}"
+  ]
+}

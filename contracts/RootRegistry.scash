@@ -3,10 +3,11 @@ pragma solidcash ^0.51.0;
 // RootRegistry: the timelocked Merkle-root publisher for FoldClaimPool.
 //
 // The operator proposes a root for a new epoch. It becomes active only after the registry has stayed
-// untouched for ROOT_DELAY blocks (a relative timelock on the registry's own UTXOs), so watchers have that
-// long to recompute the root from the public Folding@home data and raise the alarm. Activation is
-// permissionless. The pool copies the active root, and only while nothing is pending, so no one can keep
-// resetting the delay by reading the registry.
+// untouched for ROOT_DELAY blocks (a relative timelock on the registry's master UTXO), so watchers have that
+// long to recompute the root from the public Folding@home data and raise the alarm. Only the operator can
+// spend the master during the window (by proposing again, which restarts it), and a pool reading the
+// registry co-spends only the data NFT, so nobody else can reset or skip the delay. Activation is
+// permissionless.
 contract RootRegistry(pubkey operator) {
     int constant ROOT_DELAY = 144;   // blocks, about one day
 
