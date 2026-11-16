@@ -1,0 +1,58 @@
+{
+  "operator": "bitcoincash:qz0td56ndjs8snhmmzyp5g4a4vudmvl7vuxr2vsdyd",
+  "steps": {
+    "registry": {
+      "categoryId": "c9521215515164e7804c0b669c14ea773a456a382a5098dba1a2c88c14bde082",
+      "lockingBytecode": "aa20b67384ad5bf0355c95f1743c84ff4c81b5df3f90b4ef21473166ca0c8c31cb9887"
+    },
+    "propose1": {
+      "root": "f6b2e52e58cf182e987c7be93f67707cdbc9bcd474fc80be740277636512b15f",
+      "treeFile": "tree-epoch1.json",
+      "txid": "d8ffa816fd0d980872e88ac85621b97f2241d3585cfd916e7b2d4912464266b5",
+      "height": 977658
+    },
+    "token": {
+      "category": "b82593696150425e2bec572f890a6b62b3d9cf5ec82bf5d8ada857731289c478"
+    },
+    "pool": {
+      "categoryId": "f50d2d3d877673a88457c9b009351cdc1966fb86e81d29888bd014686ba8ab6a"
+    }
+  },
+  "txs": {
+    "registry-coin": {
+      "txid": "c9521215515164e7804c0b669c14ea773a456a382a5098dba1a2c88c14bde082",
+      "bytes": 219,
+      "spent": "241"
+    },
+    "registry-deploy": {
+      "txid": "d80f89918b43cb4eb94515fe8bbcc70a28e0efafa576b627adeeef06097056d0",
+      "bytes": 595,
+      "spent": "5951"
+    },
+    "propose1": {
+      "txid": "d8ffa816fd0d980872e88ac85621b97f2241d3585cfd916e7b2d4912464266b5",
+      "bytes": 3179,
+      "spent": "3228"
+    },
+    "token-coin": {
+      "txid": "b82593696150425e2bec572f890a6b62b3d9cf5ec82bf5d8ada857731289c478",
+      "bytes": 219,
+      "spent": "241"
+    },
+    "token-genesis": {
+      "txid": "5410e0d9469e127804b0f22787c5c1612f32b372a7472a4e319cb123eb786771",
+      "bytes": 258,
+      "spent": "284"
+    },
+    "pool-coin": {
+      "txid": "f50d2d3d877673a88457c9b009351cdc1966fb86e81d29888bd014686ba8ab6a",
+      "bytes": 219,
+      "spent": "241"
+    },
+    "pool-deploy": {
+      "txid": "14ba45c3bc715f66d050062c20de26197ad222292042721101626192c9afa3a6",
+      "bytes": 911,
+      "spent": "7467"
+    }
+  }
+}

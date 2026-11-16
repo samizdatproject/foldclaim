@@ -1,0 +1,892 @@
+{
+  "contractName": "FoldClaimPool",
+  "constructorInputs": [
+    {
+      "name": "rewardCategory",
+      "type": "bytes32"
+    },
+    {
+      "name": "registry",
+      "type": "address"
+    }
+  ],
+  "abi": [
+    {
+      "name": "syncRoot",
+      "selector": "f651a7f3",
+      "inputs": [],
+      "writesState": true,
+      "requiredNftIndices": [
+        0
+      ],
+      "sourceEffectOrder": "linear",
+      "externalReads": [
+        {
+          "interfaceName": "IRootRegistry",
+          "kind": "data",
+          "nftIndex": 0,
+          "addressParam": "registry"
+        }
+      ],
+      "blockLayout": {
+        "blockSize": 3,
+        "slots": [
+          {
+            "kind": "master",
+            "offset": 0
+          },
+          {
+            "kind": "dataNft",
+            "offset": 1,
+            "nftIndex": 0
+          },
+          {
+            "kind": "readOnlyDataNft",
+            "offset": 2,
+            "slotIndex": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "claim",
+      "selector": "edbd25fc",
+      "inputs": [
+        {
+          "name": "category",
+          "type": "bytes32"
+        },
+        {
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "name": "cumulative",
+          "type": "bigint"
+        },
+        {
+          "name": "proof",
+          "type": "bytes"
+        },
+        {
+          "name": "index",
+          "type": "int256"
+        },
+        {
+          "name": "__internal__vmapBatchSlot_0",
+          "type": "bytes32"
+        },
+        {
+          "name": "__internal__vmapBatchProof_0",
+          "type": "bigint"
+        },
+        {
+          "name": "__internal__vmapBatchNext_0",
+          "type": "bytes32"
+        },
+        {
+          "name": "__internal__vmapBatchPredOut_0",
+          "type": "bigint"
+        },
+        {
+          "name": "__internal__vmapBatchTrailingCount",
+          "type": "bigint"
+        },
+        {
+          "name": "__internal__genesisCall",
+          "type": "bytes"
+        },
+        {
+          "name": "__internal__returnOutputIdx",
+          "type": "bigint"
+        }
+      ],
+      "writesState": true,
+      "requiredNftIndices": [
+        0
+      ],
+      "entryAccesses": [
+        {
+          "slotIndex": 0,
+          "collection": "claimed",
+          "keyParams": [
+            "recipient"
+          ],
+          "operations": [
+            "read",
+            "write"
+          ],
+          "mutationEffectOrdinals": [
+            4
+          ],
+          "valueSource": "id:cumulative"
+        }
+      ],
+      "sourceEffectOrder": "unsupported-flow",
+      "tokenContainerTransferSites": [
+        {
+          "transferIndex": 0,
+          "tokenContainerSlot": 0,
+          "kind": "token"
+        }
+      ],
+      "tokenContainerAccesses": [
+        {
+          "keyParam": "category",
+          "operations": [
+            "transfer"
+          ],
+          "transferNftCount": 0
+        }
+      ],
+      "sortedBatchInfo": [
+        {
+          "collection": "claimed",
+          "slotIndices": [
+            0
+          ]
+        }
+      ],
+      "blockLayout": {
+        "blockSize": 6,
+        "slots": [
+          {
+            "kind": "master",
+            "offset": 0
+          },
+          {
+            "kind": "dataNft",
+            "offset": 1,
+            "nftIndex": 0
+          },
+          {
+            "kind": "entry",
+            "offset": 2,
+            "slotIndex": 0
+          },
+          {
+            "kind": "tokenContainer",
+            "offset": 3,
+            "slotIndex": 0
+          },
+          {
+            "kind": "tcTransfer",
+            "offset": 4,
+            "slotIndex": 0
+          },
+          {
+            "kind": "returnEvent",
+            "offset": 5
+          }
+        ]
+      }
+    }
+  ],
+  "bytecode": "76014c9c636d517f7c01007e817f6776014d9c636d527f7c01007e817f6776014e9c636d547f7c01007e817f67014f9d754f7c686868 91 OP_DEFINE 8263517f7c76817601510161a5630150945180777c6776014c9f63777f6701918a686867007c68 OP_1NEGATE OP_DEFINE 4f8a7c817c OP_3 OP_DEFINE 01207f75 OP_2 OP_DEFINE c0c6c0cc88c0d0c0d3a169 86 OP_DEFINE 01207f75c0ce01207f7588 87 OP_DEFINE 5e8a036376c752797e0788ce01207f52887e787e4c7888c076cd78c7876376ce82776376d101207f757cce01207f75886775686776cd23aa20c42c11d1b80f1eae4c024fc765dd0c57701ca3a974579f9bbe600079e059b4f58788d100886867767676cdc0c788ccc0c6a269d1c0ce88d3c0d0a269c0c7c38c6576c09c6476c75279879169688c76009f667575687e787e0275517e5a8a 88 OP_DEFINE 01207c7e7c01207c7e7cc0c701237c7e7b7b04519d76c753797e0788ce01207f52887e52797e4988c076cd78c7876376ce82776376d101207f757cce01207f75886775686776cd23aa20c42c11d1b80f1eae4c024fc765dd0c57701ca3a974579f9bbe600079e059b4f58788d10088687e787e0275517e775a8a 89 OP_DEFINE 5e8a08c0ce01207f518876787e06887c637c76c77e52797e2588ce01207f528888676dc0c7c0cd88c0cec0d188c0cfc0d288c0d3c0d0a269c0c6c0cc88687e1514b345c3aa980115002d115009fbfbfe09e714d8d17e0275517e5a8a OP_1 OP_DEFINE 798201208875 OP_5 OP_DEFINE 8252807c7e7e OP_6 OP_DEFINE c0ce528a518a OP_7 OP_DEFINE 74529dc05293cf538a01988a77538a7c588a777601998a77538a7c588a77a069c05293cf538a01988a758201209d01207c7e7c76820087636d01006782518763764f87636d014f6776817651a27c60a19a63758101509351806775517c7e686867758276014ba16351807c7e677602ff00a1635280517f75014c7c7e7c7e675380527f75014d7c7e7c7e68686868c08bce01878ac076c77cce528a0120548ac08bc7886e7ec08bd288c076c77cce528a0120548a5f8a7c6dc0529376c753798876c778cd8876ce78d18876cf7cd28800c0ce826301207f7500c4658c76cd02516187019d8a6675779d676d68019a8a01207f75517e4f6bc3658c76ce52798763766b6876009c667500656c76009f6375516776c0765293a5645c8a68758b006866c47663658c76d1537987637c8c7c6876009c666875009d75c0ce76528a7601888a78517e006b0000c3655b8a636c7853807e6b68769166756c826365537f7c817c6b76c7827701239c6301938a6376ce01207f7576577987637576ce827701209c63598a6867019e8a63598a68686868756c82916668750000c465658c76d159798778cd5879879b78919b6676cd5701958a59019b8a66757ba169726d726da16901868a608a6d51 f651a7f3 OP_DEFINE 745e9d52558a5679588a7557558a59558a57796b58796b59796b5a796b53796b57795979810120807e5a797e5b79810120807e060000edbd25fc7452947982638201249d7601227f7701007e8176c9009dc87801207f758801227f7502ffff7c7e7c527f777e6775685479568a5579568a567981568a5779568a587981568a5479537a88577900a269010055797e567958807ea857798277012096588a5879827778012095588a9d760118a169597a00588a657653799f635a7978012095588a012093588a7f7578012095588a7f77000120807e01207f7552795297588a009c635155797e7801948a6751787e557901948a6852795296588a537a757c6b7c6c788b588a7b757700675168667c009d7b01998a75885679a8011f7f017f847e578ac074569479936ec78877cf01207f01207f70876377777781677578815379817d9f69788176009c636d679f69686d750068587978a0695779a8011f7f017f847e745d947901607f7701207f758101829e63745d947901207f75745d947901207f7701207f7581745d947901407f7701207f756b6b6b6b5879816c766c88578ac06c936ec788cf01207f01207f5279557987645279815579819f69788176009c637567557981a06968686d75c052936c7c76cd53798876d17601207f77518801878a537952797e55797e7cd2886d6d6775685679587a597a537a94c08bce01878ac076c77cce528a0120548ac08bc788578ac05293c787c05293cf8277929a63c07456947993ce01878ac07456947993ce01207f77518868c08bcfc08bd288c076c77cce528a0120548a5f8a6c6c6c6c6c740113947901829e69740113947901829c645d8a7701207f757401149479885d8a757401169479876374011394794f9d6774011394797600a26975740113947976cd7401159479c093c788757401139479d17601207f77518801878a7401139479d25d8a7574011694797e5d8a7701207f777e886868740113947900a28b740115947900a0578a740119947900c38c6576009f6375516776c75379877b937c8c006866767401189479886d740119947900c48c6576009f6375516776cd5379877b937c8c006866767401179479886d6d75740113947900a20114799d7401978a01978a0112947a75745b947a75c076c77cce528a0120548a5100c3658c76c754019b8a6675789d00c4658c76cd54019b8a6675789d6dc08bc7c08bcd88c08bcfc08bd288c08bcec08bd188c0ce528a517ec3658c76009f6375516776c09f6376ce527987635c8a68006776c05693a26376ce527987635c8a68680068686675c05393ce827700a0635779c0ce01207f757c01898ac05393c7886878c05493cd8876c05493d3885279c05493d1bc88c05393ce76827701219c6301207f528763c05393c700c4658c76d17682770120a26301207f75547987677500686376cd537987916700686376d391697c8b7c6876916675009d6d677568677568c05393ce827700a06301968a64c05393ce82770120a169c05393d0789400a169686801968a63c05393c7c05393cd88c05393d07894c05393d3a169c05393cec05393d188687b757c6d7b007ca8011f7f757c820160a1635167a852687c7e7e5c797600a2637dd28876d1c0ce528a8876d3008876cd015188cc02b004a1676d0068c0ce8263528a00c4658c76cd810200019701519c019d8a6675779d676d68019a8a76528a7601888a78517e006b0000c3655b8a636c7853807e6b68769166756c826365537f7c817c6b76c7827701239c6301938a6376ce01207f7576577987637576ce827701209c019f8a67019e8a019f8a686868756c829166687554790078c0c77c0120548a7e78518a7e0000c465658c76d1765979877c5c79879b78cd5a79879b78919b6676cd5901958a5b79877b937c76d1587987635379007c657682770123a26301237f7c5379cd877b9b7c0067516866757664c3658c5279cd78c787635279d178ce876377517c6868769152799b667568696876916675547aa1697777726d726da16901868a608a01968a63c05393c6c05393cca169686d6d6d6d6d6d51 edbd25fc OP_DEFINE 7c7e7c01237c7e7c032776c752797e04885189217e787e4ca2528976539c63757c518ace01207f5288528a88c0ce01207f5188528a8876cdc0c78876d1c0ce8876d3c0d0a26976ccc0c687776776529c6375518ace01207f5288528a88c0ce01207f5188528a88c0c49f63c0d1826301207f75528a87916967756868516763518ace01207f5288528a7d88c0ce01207f75886775c0ce01207f5188528a88c0cfc0d28868c0c7c0cd88c0cec0d188c0d3c0d0a269c0c6c0cc8768687e019c8a OP_4 OP_DEFINE 765102ff008d9301218001207f77010088 OP_8 OP_DEFINE 76cd78c78876d178ce8876d378d0a26976d278cf8876ce76827701219c6301207f7752879169677568 OP_9 OP_DEFINE 019c8a OP_10 OP_DEFINE 658c76ce827778c75679879b78919b6676c75579876376c6537a937b7b6876ce5779877b937c76ce76557987917c82779a OP_11 OP_DEFINE 76cd78c78876d278cf8876d178ce88 OP_12 OP_DEFINE 7401159479c093cf01207f OP_13 OP_DEFINE c0c77c01207c7e7c01237c7e7c OP_14 OP_DEFINE c08bc7788875c08bc7c08bcd88c08bcec08bd188 OP_15 OP_DEFINE c08bc6c08bcc88c08bd0c08bd3a169 OP_16 OP_DEFINE 76ce82777601209c7c01219c9b 93 OP_DEFINE 7ea8557a75547a547a547a547a 94 OP_DEFINE 79876376cc537a937b7b6876d1 95 OP_DEFINE c05393d1827700a0 96 OP_DEFINE 0113947a75740113947a7574 97 OP_DEFINE 7c0088517f7c01208801207f 98 OP_DEFINE c08bcf517f7c01208801207f 99 OP_DEFINE c0c7c0cd88c0cec0d188c0ce 9a OP_DEFINE 79877b937c7691 9b OP_DEFINE 7777aa02aa207c7e01877e 9c OP_DEFINE 78d15479879a7b937c7691 9d OP_DEFINE bc56797c01898a7c76c77b87 9e OP_DEFINE 630078c053939c9b64598a6868 9f OP_DEFINE OP_DEPTH OP_1SUB OP_ROLL OP_SIZE OP_4 OP_NUMEQUALVERIFY OP_INVOKE 1744a65e30fda2209c561da7e1920101f44c313a02 OP_DROP",
+  "source": "pragma solidcash ^0.51.0;\n\ninterface IRootRegistry {\n    public bytes32 activeRoot;\n    public int activeEpoch;\n    public bytes32 pendingRoot;\n    public int pendingEpoch;\n}\n\n// FoldClaimPool: pull-based reward claims for a CashToken (FoldingCash FLDCH).\n//\n// The pool holds the reward tokens in a token container and pays any leaf of the active Merkle root of\n// (recipient locking bytecode, cumulative earned). Anyone can submit a claim; tokens always go to the\n// leaf's own locking bytecode, so a relayer can claim for a user but never redirect the payout.\n// `claimed` is a verified mapping: one entry NFT per recipient records the cumulative total already paid\n// (the receipt), so a claim pays only the difference and can never be repeated. Roots come from a\n// RootRegistry, where each new root waits out a public audit window before it can be used.\ncontract FoldClaimPool(bytes32 rewardCategory, address registry) {\n    bytes32 root;\n    int epoch;\n\n    mapping(address => bigint) public claimed;\n\n    // Copy the registry's ACTIVE root (never the pending one, which is still in its audit window).\n    // Anyone may call it; reading the registry does not touch its timelocked master.\n    function syncRoot() {\n        int active = IRootRegistry(registry).activeEpoch;\n        require(active > this.epoch, \"already in sync\");\n        this.root = IRootRegistry(registry).activeRoot;\n        this.epoch = active;\n    }\n\n    function claim(bytes32 category, address recipient, bigint cumulative, bytes proof, int index) {\n        require(category == rewardCategory, \"wrong token\");\n        require(index >= 0, \"negative index\");\n        bytes32 node = sha256(0x00 + bytes(recipient) + toPaddedBytes(cumulative, 8));\n        int depth = proof.length / 32;\n        require(proof.length == depth * 32, \"bad proof length\");\n        require(depth <= 24, \"proof too deep\");\n        int position = index;\n        for (int k = 0; k < depth; k++) {\n            bytes32 sibling = bytes32(proof.slice(k * 32, k * 32 + 32));\n            if (position % 2 == 0) {\n                node = sha256(0x01 + node + sibling);\n            } else {\n                node = sha256(0x01 + sibling + node);\n            }\n            position = position / 2;\n        }\n        require(position == 0, \"index out of range\");\n        require(node == this.root, \"not in the active root\");\n\n        bigint already = this.claimed[recipient];\n        require(cumulative > already, \"nothing to claim\");\n        this.claimed[recipient] = cumulative;\n        this.tokens[category].transfer(bytes(recipient), cumulative - already);\n    }\n}\n",
+  "debug": {
+    "bytecode": "3676014c9c636d517f7c01007e817f6776014d9c636d527f7c01007e817f6776014e9c636d547f7c01007e817f67014f9d754f7c686868019189278263517f7c76817601510161a5630150945180777c6776014c9f63777f6701918a686867007c684f89054f8a7c817c53890401207f7552890bc0c6c0cc88c0d0c0d3a1690186890b01207f75c0ce01207f75880187894c975e8a036376c752797e0788ce01207f52887e787e4c7888c076cd78c7876376ce82776376d101207f757cce01207f75886775686776cd23aa20c42c11d1b80f1eae4c024fc765dd0c57701ca3a974579f9bbe600079e059b4f58788d100886867767676cdc0c788ccc0c6a269d1c0ce88d3c0d0a269c0c7c38c6576c09c6476c75279879169688c76009f667575687e787e0275517e5a8a0188894c7a01207c7e7c01207c7e7cc0c701237c7e7b7b04519d76c753797e0788ce01207f52887e52797e4988c076cd78c7876376ce82776376d101207f757cce01207f75886775686776cd23aa20c42c11d1b80f1eae4c024fc765dd0c57701ca3a974579f9bbe600079e059b4f58788d10088687e787e0275517e775a8a0189894c5c5e8a08c0ce01207f518876787e06887c637c76c77e52797e2588ce01207f528888676dc0c7c0cd88c0cec0d188c0cfc0d288c0d3c0d0a269c0c6c0cc88687e1514b345c3aa980115002d115009fbfbfe09e714d8d17e0275517e5a8a5189067982012088755589068252807c7e7e568906c0ce528a518a57894dc90174529dc05293cf538a01988a77538a7c588a777601998a77538a7c588a77a069c05293cf538a01988a758201209d01207c7e7c76820087636d01006782518763764f87636d014f6776817651a27c60a19a63758101509351806775517c7e686867758276014ba16351807c7e677602ff00a1635280517f75014c7c7e7c7e675380527f75014d7c7e7c7e68686868c08bce01878ac076c77cce528a0120548ac08bc7886e7ec08bd288c076c77cce528a0120548a5f8a7c6dc0529376c753798876c778cd8876ce78d18876cf7cd28800c0ce826301207f7500c4658c76cd02516187019d8a6675779d676d68019a8a01207f75517e4f6bc3658c76ce52798763766b6876009c667500656c76009f6375516776c0765293a5645c8a68758b006866c47663658c76d1537987637c8c7c6876009c666875009d75c0ce76528a7601888a78517e006b0000c3655b8a636c7853807e6b68769166756c826365537f7c817c6b76c7827701239c6301938a6376ce01207f7576577987637576ce827701209c63598a6867019e8a63598a68686868756c82916668750000c465658c76d159798778cd5879879b78919b6676cd5701958a59019b8a66757ba169726d726da16901868a608a6d5104f651a7f3894dd005745e9d52558a5679588a7557558a59558a57796b58796b59796b5a796b53796b57795979810120807e5a797e5b79810120807e060000edbd25fc7452947982638201249d7601227f7701007e8176c9009dc87801207f758801227f7502ffff7c7e7c527f777e6775685479568a5579568a567981568a5779568a587981568a5479537a88577900a269010055797e567958807ea857798277012096588a5879827778012095588a9d760118a169597a00588a657653799f635a7978012095588a012093588a7f7578012095588a7f77000120807e01207f7552795297588a009c635155797e7801948a6751787e557901948a6852795296588a537a757c6b7c6c788b588a7b757700675168667c009d7b01998a75885679a8011f7f017f847e578ac074569479936ec78877cf01207f01207f70876377777781677578815379817d9f69788176009c636d679f69686d750068587978a0695779a8011f7f017f847e745d947901607f7701207f758101829e63745d947901207f75745d947901207f7701207f7581745d947901407f7701207f756b6b6b6b5879816c766c88578ac06c936ec788cf01207f01207f5279557987645279815579819f69788176009c637567557981a06968686d75c052936c7c76cd53798876d17601207f77518801878a537952797e55797e7cd2886d6d6775685679587a597a537a94c08bce01878ac076c77cce528a0120548ac08bc788578ac05293c787c05293cf8277929a63c07456947993ce01878ac07456947993ce01207f77518868c08bcfc08bd288c076c77cce528a0120548a5f8a6c6c6c6c6c740113947901829e69740113947901829c645d8a7701207f757401149479885d8a757401169479876374011394794f9d6774011394797600a26975740113947976cd7401159479c093c788757401139479d17601207f77518801878a7401139479d25d8a7574011694797e5d8a7701207f777e886868740113947900a28b740115947900a0578a740119947900c38c6576009f6375516776c75379877b937c8c006866767401189479886d740119947900c48c6576009f6375516776cd5379877b937c8c006866767401179479886d6d75740113947900a20114799d7401978a01978a0112947a75745b947a75c076c77cce528a0120548a5100c3658c76c754019b8a6675789d00c4658c76cd54019b8a6675789d6dc08bc7c08bcd88c08bcfc08bd288c08bcec08bd188c0ce528a517ec3658c76009f6375516776c09f6376ce527987635c8a68006776c05693a26376ce527987635c8a68680068686675c05393ce827700a0635779c0ce01207f757c01898ac05393c7886878c05493cd8876c05493d3885279c05493d1bc88c05393ce76827701219c6301207f528763c05393c700c4658c76d17682770120a26301207f75547987677500686376cd537987916700686376d391697c8b7c6876916675009d6d677568677568c05393ce827700a06301968a64c05393ce82770120a169c05393d0789400a169686801968a63c05393c7c05393cd88c05393d07894c05393d3a169c05393cec05393d188687b757c6d7b007ca8011f7f757c820160a1635167a852687c7e7e5c797600a2637dd28876d1c0ce528a8876d3008876cd015188cc02b004a1676d0068c0ce8263528a00c4658c76cd810200019701519c019d8a6675779d676d68019a8a76528a7601888a78517e006b0000c3655b8a636c7853807e6b68769166756c826365537f7c817c6b76c7827701239c6301938a6376ce01207f7576577987637576ce827701209c019f8a67019e8a019f8a686868756c829166687554790078c0c77c0120548a7e78518a7e0000c465658c76d1765979877c5c79879b78cd5a79879b78919b6676cd5901958a5b79877b937c76d1587987635379007c657682770123a26301237f7c5379cd877b9b7c0067516866757664c3658c5279cd78c787635279d178ce876377517c6868769152799b667568696876916675547aa1697777726d726da16901868a608a01968a63c05393c6c05393cca169686d6d6d6d6d6d5104edbd25fc894cbf7c7e7c01237c7e7c032776c752797e04885189217e787e4ca2528976539c63757c518ace01207f5288528a88c0ce01207f5188528a8876cdc0c78876d1c0ce8876d3c0d0a26976ccc0c687776776529c6375518ace01207f5288528a88c0ce01207f5188528a88c0c49f63c0d1826301207f75528a87916967756868516763518ace01207f5288528a7d88c0ce01207f75886775c0ce01207f5188528a88c0cfc0d28868c0c7c0cd88c0cec0d188c0d3c0d0a269c0c6c0cc8768687e019c8a548911765102ff008d9301218001207f7701008858892976cd78c78876d178ce8876d378d0a26976d278cf8876ce76827701219c6301207f7752879169677568598903019c8a5a8931658c76ce827778c75679879b78919b6676c75579876376c6537a937b7b6876ce5779877b937c76ce76557987917c82779a5b890f76cd78c78876d278cf8876d178ce885c890b7401159479c093cf01207f5d890dc0c77c01207c7e7c01237c7e7c5e8914c08bc7788875c08bc7c08bcd88c08bcec08bd1885f890fc08bc6c08bcc88c08bd0c08bd3a16960890d76ce82777601209c7c01219c9b0193890d7ea8557a75547a547a547a547a0194890d79876376cc537a937b7b6876d101958908c05393d1827700a00196890c0113947a75740113947a75740197890c7c0088517f7c01208801207f0198890cc08bcf517f7c01208801207f0199890cc0c7c0cd88c0cec0d188c0ce019a890779877b937c7691019b890b7777aa02aa207c7e01877e019c890b78d15479879a7b937c7691019d890cbc56797c01898a7c76c77b87019e890d630078c053939c9b64598a6868019f89748c7a82549d8a151744a65e30fda2209c561da7e1920101f44c313a0275",
+    "sourceMap": "18::58:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;26:4:31:5;;;33::57;;;18:0:58:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;::::1;;;;;;;;;;;;;;;;;;;;;;",
+    "logs": [],
+    "requires": [],
+    "functionDebug": {
+      "f651a7f3": {
+        "requires": [
+          {
+            "ip": 29,
+            "line": 28,
+            "message": "already in sync"
+          }
+        ],
+        "logs": [],
+        "sourceMap": "26:4:31:5;;;27:21:27:56;;;;;;;;;;;;;;;28:16:28:22;:25::35;;;;;;;;;:16:::1;:8::56;29:20:29:54:0;;;;;;;;;:8::55:1;;;;;;30:21:30:27:0;:8::28:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;26:4:31:5:0;;;;;;;;;;;;;;;;;;;::::1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"
+      },
+      "edbd25fc": {
+        "requires": [
+          {
+            "ip": 116,
+            "line": 34,
+            "message": "wrong token"
+          },
+          {
+            "ip": 121,
+            "line": 35,
+            "message": "negative index"
+          },
+          {
+            "ip": 149,
+            "line": 38,
+            "message": "bad proof length"
+          },
+          {
+            "ip": 153,
+            "line": 39,
+            "message": "proof too deep"
+          },
+          {
+            "ip": 244,
+            "line": 50,
+            "message": "index out of range"
+          },
+          {
+            "ip": 249,
+            "line": 51,
+            "message": "not in the active root"
+          },
+          {
+            "ip": 284,
+            "line": 53
+          },
+          {
+            "ip": 285,
+            "line": 53
+          },
+          {
+            "ip": 286,
+            "line": 53
+          },
+          {
+            "ip": 287,
+            "line": 53
+          },
+          {
+            "ip": 288,
+            "line": 53
+          },
+          {
+            "ip": 289,
+            "line": 53
+          },
+          {
+            "ip": 290,
+            "line": 53
+          },
+          {
+            "ip": 291,
+            "line": 53
+          },
+          {
+            "ip": 292,
+            "line": 53
+          },
+          {
+            "ip": 293,
+            "line": 53
+          },
+          {
+            "ip": 294,
+            "line": 53
+          },
+          {
+            "ip": 295,
+            "line": 53
+          },
+          {
+            "ip": 296,
+            "line": 53
+          },
+          {
+            "ip": 297,
+            "line": 53
+          },
+          {
+            "ip": 298,
+            "line": 53
+          },
+          {
+            "ip": 299,
+            "line": 53
+          },
+          {
+            "ip": 300,
+            "line": 53
+          },
+          {
+            "ip": 301,
+            "line": 53
+          },
+          {
+            "ip": 302,
+            "line": 53
+          },
+          {
+            "ip": 311,
+            "line": 54,
+            "message": "nothing to claim"
+          },
+          {
+            "ip": 417,
+            "line": 55
+          },
+          {
+            "ip": 418,
+            "line": 55
+          },
+          {
+            "ip": 419,
+            "line": 55
+          },
+          {
+            "ip": 422,
+            "line": 55
+          },
+          {
+            "ip": 423,
+            "line": 55
+          },
+          {
+            "ip": 424,
+            "line": 55
+          },
+          {
+            "ip": 425,
+            "line": 55
+          },
+          {
+            "ip": 426,
+            "line": 55
+          },
+          {
+            "ip": 427,
+            "line": 55
+          },
+          {
+            "ip": 428,
+            "line": 55
+          },
+          {
+            "ip": 429,
+            "line": 55
+          },
+          {
+            "ip": 430,
+            "line": 55
+          },
+          {
+            "ip": 431,
+            "line": 55
+          },
+          {
+            "ip": 432,
+            "line": 55
+          },
+          {
+            "ip": 433,
+            "line": 55
+          },
+          {
+            "ip": 434,
+            "line": 55
+          },
+          {
+            "ip": 435,
+            "line": 55
+          },
+          {
+            "ip": 436,
+            "line": 55
+          },
+          {
+            "ip": 437,
+            "line": 55
+          },
+          {
+            "ip": 438,
+            "line": 55
+          },
+          {
+            "ip": 439,
+            "line": 55
+          },
+          {
+            "ip": 440,
+            "line": 55
+          },
+          {
+            "ip": 441,
+            "line": 55
+          },
+          {
+            "ip": 442,
+            "line": 55
+          },
+          {
+            "ip": 443,
+            "line": 55
+          },
+          {
+            "ip": 444,
+            "line": 55
+          },
+          {
+            "ip": 445,
+            "line": 55
+          },
+          {
+            "ip": 446,
+            "line": 55
+          },
+          {
+            "ip": 447,
+            "line": 55
+          }
+        ],
+        "logs": [],
+        "sourceMap": "33:4:57:5;;;:19:33:35;;;:88::97;;;;;:4:57:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;34:16:34:24;;:28::42;;:8::59:1;35:16:35:21:0;;:25::26;:16:::1;:8::46;36:30:36:34:0;:43::52;;:30::53:1;:70::80:0;;:82::83;:56::84:1;:30;:23::85;37:20:37:25:0;;:::32:1;;:35::37:0;:20:::1;:8::38;;38:16:38:21:0;;:::28:1;;:32::37:0;:40::42;:32:::1;;;:8::64;39:16:39:21:0;:25::27;:16:::1;:8::47;40:23:40:28:0;;41:21:41:22;:13::23:1;;:8:49:9:0;:24:41:25;:28::33;;:24:::1;:8:49:9:0;42:38:42:43;;:58::59;:62::64;:58:::1;;;:67::69:0;:58:::1;;;:38::70;;:50::51:0;:54::56;:50:::1;;;:38::70;;:30::71;;;;;;;43:16:43:24:0;;:27::28;:16:::1;;;:32::33:0;:16:::1;:35:45:13:0;44:30:44:34;:37::41;;:30:::1;:44::51:0;:30:::1;;45:19:47:13:0;46:30:46:34;:37::44;:30:::1;:47::51:0;;:30:::1;;45:19:47:13;48:23:48:31:0;;:34::35;:23:::1;;;:12::36;;;;;;;41:35:41::0;:::38:1;;;;;::49:9;:8;;;;;50:16:50:24:0;:28::29;:8::53:1;51:16:51:20:0;:24::33;;;:8::61:1;53:25:53:48:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;54:16:54:26;;:29::36;:16:::1;:8::58;55::55:45;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:34::44:0;;:8::45:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;56:20:56:28:0;;:45::54;;:57::67;;:70::77;;:57:::1;33:4:57:5:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;::::1;;;;;;;;;;;;;;;;;;;;;;;;::::0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;::::1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;::::0;;;;;;;;;;;;;;;;;;;;;;;;;::::1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"
+      }
+    },
+    "invokeDebug": {
+      "1": {
+        "bytecode": "5e8a08c0ce01207f518876787e06887c637c76c77e52797e2588ce01207f528888676dc0c7c0cd88c0cec0d188c0cfc0d288c0d3c0d0a269c0c6c0cc88687e1514b345c3aa980115002d115009fbfbfe09e714d8d17e0275517e5a8a",
+        "name": "compiler helper 1",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "18::58:1;;;;;;;;;;;;;;;;;"
+      },
+      "2": {
+        "bytecode": "01207f75",
+        "name": "compiler helper 2",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "18::58:1;;"
+      },
+      "4": {
+        "bytecode": "7c7e7c01237c7e7c032776c752797e04885189217e787e4ca2528976539c63757c518ace01207f5288528a88c0ce01207f5188528a8876cdc0c78876d1c0ce8876d3c0d0a26976ccc0c687776776529c6375518ace01207f5288528a88c0ce01207f5188528a88c0c49f63c0d1826301207f75528a87916967756868516763518ace01207f5288528a7d88c0ce01207f75886775c0ce01207f5188528a88c0cfc0d28868c0c7c0cd88c0cec0d188c0d3c0d0a269c0c6c0cc8768687e019c8a",
+        "name": "outlined source span 4",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "26:4:31:5;;;;;;;;;;;;;;;;;;"
+      },
+      "5": {
+        "bytecode": "798201208875",
+        "name": "compiler helper 5",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "18::58:1;;;;"
+      },
+      "6": {
+        "bytecode": "8252807c7e7e",
+        "name": "compiler helper 6",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "18::58:1;;;;;"
+      },
+      "7": {
+        "bytecode": "c0ce528a518a",
+        "name": "compiler helper 7",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "18::58:1;;;;;"
+      },
+      "8": {
+        "bytecode": "765102ff008d9301218001207f77010088",
+        "name": "outlined source span 8",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "27:21:27:56;;;;;;;;;;;"
+      },
+      "9": {
+        "bytecode": "76cd78c78876d178ce8876d378d0a26976d278cf8876ce76827701219c6301207f7752879169677568",
+        "name": "outlined source span 9",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "26:4:31:5:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"
+      },
+      "10": {
+        "bytecode": "019c8a",
+        "name": "outlined source span 10",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "18::58:1;"
+      },
+      "11": {
+        "bytecode": "658c76ce827778c75679879b78919b6676c75579876376c6537a937b7b6876ce5779877b937c76ce76557987917c82779a",
+        "name": "outlined source span 11",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "26:4:31:5:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"
+      },
+      "12": {
+        "bytecode": "76cd78c78876d278cf8876d178ce88",
+        "name": "outlined source span 12",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "26:4:31:5:1;;;;;;;;;;;;;;"
+      },
+      "13": {
+        "bytecode": "7401159479c093cf01207f",
+        "name": "outlined source span 13",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "33:4:57:5;;;;;;;;"
+      },
+      "14": {
+        "bytecode": "c0c77c01207c7e7c01237c7e7c",
+        "name": "outlined source span 14",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "18::58:1;;;;;;;;;;"
+      },
+      "15": {
+        "bytecode": "c08bc7788875c08bc7c08bcd88c08bcec08bd188",
+        "name": "outlined source span 15",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "26:4:31:5:1;;;;;;;;;;;;;;;;;;;"
+      },
+      "16": {
+        "bytecode": "c08bc6c08bcc88c08bd0c08bd3a169",
+        "name": "outlined source span 16",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "26:4:31:5:1;;;;;;;;;;;;;;"
+      },
+      "-6": {
+        "bytecode": "c0c6c0cc88c0d0c0d3a169",
+        "name": "compiler helper -6",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "18::58:1;;;;;;;;;;"
+      },
+      "-7": {
+        "bytecode": "01207f75c0ce01207f7588",
+        "name": "compiler helper -7",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "18::58:1;;;;;;;;"
+      },
+      "-8": {
+        "bytecode": "5e8a036376c752797e0788ce01207f52887e787e4c7888c076cd78c7876376ce82776376d101207f757cce01207f75886775686776cd23aa20c42c11d1b80f1eae4c024fc765dd0c57701ca3a974579f9bbe600079e059b4f58788d100886867767676cdc0c788ccc0c6a269d1c0ce88d3c0d0a269c0c7c38c6576c09c6476c75279879169688c76009f667575687e787e0275517e5a8a",
+        "name": "compiler helper -8",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "18::58:1;;;;;;;;;;;;;;;;;"
+      },
+      "-9": {
+        "bytecode": "01207c7e7c01207c7e7cc0c701237c7e7b7b04519d76c753797e0788ce01207f52887e52797e4988c076cd78c7876376ce82776376d101207f757cce01207f75886775686776cd23aa20c42c11d1b80f1eae4c024fc765dd0c57701ca3a974579f9bbe600079e059b4f58788d10088687e787e0275517e775a8a",
+        "name": "compiler helper -9",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "18::58:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"
+      },
+      "-19": {
+        "bytecode": "76ce82777601209c7c01219c9b",
+        "name": "outlined source span -19",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "26:4:31:5:1;;;;;;;;;;"
+      },
+      "-20": {
+        "bytecode": "7ea8557a75547a547a547a547a",
+        "name": "outlined source span -20",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "44:30:44:51:1;:23::52;:16::53;;;;;;;;;;"
+      },
+      "-21": {
+        "bytecode": "79876376cc537a937b7b6876d1",
+        "name": "outlined source span -21",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "26:4:31:5:1;;;;;;;;;;;;"
+      },
+      "-22": {
+        "bytecode": "c05393d1827700a0",
+        "name": "outlined source span -22",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "33:4:57:5:1;;;;;;;"
+      },
+      "-23": {
+        "bytecode": "0113947a75740113947a7574",
+        "name": "outlined source span -23",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "33:4:57:5:1;;;;;;;;;"
+      },
+      "-24": {
+        "bytecode": "7c0088517f7c01208801207f",
+        "name": "outlined source span -24",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "27:21:27:56;;;;;;;;;"
+      },
+      "-25": {
+        "bytecode": "c08bcf517f7c01208801207f",
+        "name": "outlined source span -25",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "28:25:28:35;;;;;;;;;"
+      },
+      "-26": {
+        "bytecode": "c0c7c0cd88c0cec0d188c0ce",
+        "name": "outlined source span -26",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "26:4:31:5:1;;;;;;;;;;;"
+      },
+      "-27": {
+        "bytecode": "79877b937c7691",
+        "name": "outlined source span -27",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "26:4:31:5:1;;;;;;"
+      },
+      "-28": {
+        "bytecode": "7777aa02aa207c7e01877e",
+        "name": "outlined source span -28",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "26:4:31:5;;;;;;;"
+      },
+      "-29": {
+        "bytecode": "78d15479879a7b937c7691",
+        "name": "outlined source span -29",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "26:4:31:5:1;;;;;;;;;;"
+      },
+      "-30": {
+        "bytecode": "bc56797c01898a7c76c77b87",
+        "name": "outlined source span -30",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "26:4:31:5:1;;;;;;;;;;"
+      },
+      "-31": {
+        "bytecode": "630078c053939c9b64598a6868",
+        "name": "outlined source span -31",
+        "requires": [],
+        "logs": [],
+        "sourceMap": "33:4:57:5:1;;;;;;;;;;;;"
+      }
+    }
+  },
+  "callRecords": "returning",
+  "genesisCalls": true,
+  "recordSound": true,
+  "functionBodies": {
+    "f651a7f3": "74529dc05293cf538a01988a77538a7c588a777601998a77538a7c588a77a069c05293cf538a01988a758201209d01207c7e7c76820087636d01006782518763764f87636d014f6776817651a27c60a19a63758101509351806775517c7e686867758276014ba16351807c7e677602ff00a1635280517f75014c7c7e7c7e675380527f75014d7c7e7c7e68686868c08bce01878ac076c77cce528a0120548ac08bc7886e7ec08bd288c076c77cce528a0120548a5f8a7c6dc0529376c753798876c778cd8876ce78d18876cf7cd28800c0ce826301207f7500c4658c76cd02516187019d8a6675779d676d68019a8a01207f75517e4f6bc3658c76ce52798763766b6876009c667500656c76009f6375516776c0765293a5645c8a68758b006866c47663658c76d1537987637c8c7c6876009c666875009d75c0ce76528a7601888a78517e006b0000c3655b8a636c7853807e6b68769166756c826365537f7c817c6b76c7827701239c6301938a6376ce01207f7576577987637576ce827701209c63598a6867019e8a63598a68686868756c82916668750000c465658c76d159798778cd5879879b78919b6676cd5701958a59019b8a66757ba169726d726da16901868a608a6d51",
+    "edbd25fc": "745e9d52558a5679588a7557558a59558a57796b58796b59796b5a796b53796b57795979810120807e5a797e5b79810120807e060000edbd25fc7452947982638201249d7601227f7701007e8176c9009dc87801207f758801227f7502ffff7c7e7c527f777e6775685479568a5579568a567981568a5779568a587981568a5479537a88577900a269010055797e567958807ea857798277012096588a5879827778012095588a9d760118a169597a00588a657653799f635a7978012095588a012093588a7f7578012095588a7f77000120807e01207f7552795297588a009c635155797e7801948a6751787e557901948a6852795296588a537a757c6b7c6c788b588a7b757700675168667c009d7b01998a75885679a8011f7f017f847e578ac074569479936ec78877cf01207f01207f70876377777781677578815379817d9f69788176009c636d679f69686d750068587978a0695779a8011f7f017f847e745d947901607f7701207f758101829e63745d947901207f75745d947901207f7701207f7581745d947901407f7701207f756b6b6b6b5879816c766c88578ac06c936ec788cf01207f01207f5279557987645279815579819f69788176009c637567557981a06968686d75c052936c7c76cd53798876d17601207f77518801878a537952797e55797e7cd2886d6d6775685679587a597a537a94c08bce01878ac076c77cce528a0120548ac08bc788578ac05293c787c05293cf8277929a63c07456947993ce01878ac07456947993ce01207f77518868c08bcfc08bd288c076c77cce528a0120548a5f8a6c6c6c6c6c740113947901829e69740113947901829c645d8a7701207f757401149479885d8a757401169479876374011394794f9d6774011394797600a26975740113947976cd7401159479c093c788757401139479d17601207f77518801878a7401139479d25d8a7574011694797e5d8a7701207f777e886868740113947900a28b740115947900a0578a740119947900c38c6576009f6375516776c75379877b937c8c006866767401189479886d740119947900c48c6576009f6375516776cd5379877b937c8c006866767401179479886d6d75740113947900a20114799d7401978a01978a0112947a75745b947a75c076c77cce528a0120548a5100c3658c76c754019b8a6675789d00c4658c76cd54019b8a6675789d6dc08bc7c08bcd88c08bcfc08bd288c08bcec08bd188c0ce528a517ec3658c76009f6375516776c09f6376ce527987635c8a68006776c05693a26376ce527987635c8a68680068686675c05393ce827700a0635779c0ce01207f757c01898ac05393c7886878c05493cd8876c05493d3885279c05493d1bc88c05393ce76827701219c6301207f528763c05393c700c4658c76d17682770120a26301207f75547987677500686376cd537987916700686376d391697c8b7c6876916675009d6d677568677568c05393ce827700a06301968a64c05393ce82770120a169c05393d0789400a169686801968a63c05393c7c05393cd88c05393d07894c05393d3a169c05393cec05393d188687b757c6d7b007ca8011f7f757c820160a1635167a852687c7e7e5c797600a2637dd28876d1c0ce528a8876d3008876cd015188cc02b004a1676d0068c0ce8263528a00c4658c76cd810200019701519c019d8a6675779d676d68019a8a76528a7601888a78517e006b0000c3655b8a636c7853807e6b68769166756c826365537f7c817c6b76c7827701239c6301938a6376ce01207f7576577987637576ce827701209c019f8a67019e8a019f8a686868756c829166687554790078c0c77c0120548a7e78518a7e0000c465658c76d1765979877c5c79879b78cd5a79879b78919b6676cd5901958a5b79877b937c76d1587987635379007c657682770123a26301237f7c5379cd877b9b7c0067516866757664c3658c5279cd78c787635279d178ce876377517c6868769152799b667568696876916675547aa1697777726d726da16901868a608a01968a63c05393c6c05393cca169686d6d6d6d6d6d51"
+  },
+  "fingerprint": "85cf810407d2189319a0986831fd2341ddd618035b3352dcf4ccccfdb93f6434",
+  "stateLayout": {
+    "variables": [
+      {
+        "name": "root",
+        "type": "bytes32",
+        "nftIndex": 0,
+        "fieldIndex": 0
+      },
+      {
+        "name": "epoch",
+        "type": "int256",
+        "nftIndex": 0,
+        "fieldIndex": 1
+      }
+    ],
+    "dataNftCount": 1,
+    "commitmentLimit": 128,
+    "collections": [
+      {
+        "name": "claimed",
+        "signature": "claimed:mapping(address => bigint)",
+        "kind": "mapping",
+        "keyType": "address",
+        "valueType": "bigint",
+        "sorted": true
+      }
+    ],
+    "mappings": [
+      {
+        "name": "claimed",
+        "signature": "claimed:mapping(address => bigint)",
+        "kind": "mapping",
+        "keyType": "address",
+        "valueType": "bigint",
+        "sorted": true
+      }
+    ]
+  },
+  "externalInterfaces": [
+    {
+      "name": "IRootRegistry",
+      "stateLayout": {
+        "variables": [
+          {
+            "name": "activeRoot",
+            "type": "bytes32",
+            "nftIndex": 0,
+            "fieldIndex": 0
+          },
+          {
+            "name": "activeEpoch",
+            "type": "int256",
+            "nftIndex": 0,
+            "fieldIndex": 1
+          },
+          {
+            "name": "pendingRoot",
+            "type": "bytes32",
+            "nftIndex": 0,
+            "fieldIndex": 2
+          },
+          {
+            "name": "pendingEpoch",
+            "type": "int256",
+            "nftIndex": 1,
+            "fieldIndex": 0
+          }
+        ],
+        "dataNftCount": 2,
+        "commitmentLimit": 128
+      }
+    }
+  ],
+  "compiler": {
+    "name": "solidc",
+    "version": "0.51.0",
+    "options": {
+      "enforceFunctionParameterTypes": true,
+      "enforceLocktimeGuard": true,
+      "enforceFinalRequire": true,
+      "allowUnsafeOperations": false,
+      "commitmentLimit": 128,
+      "messageBus": false
+    }
+  },
+  "updatedAt": "2026-11-16T19:46:28.810Z",
+  "invocationAnalysis": {
+    "version": 1,
+    "protocolVersions": [
+      1
+    ],
+    "functions": [
+      {
+        "id": 0,
+        "name": "syncRoot",
+        "arity": 0,
+        "entryPoint": true,
+        "selector": "f651a7f3",
+        "calls": [],
+        "closure": [
+          0
+        ],
+        "component": 0,
+        "recursive": false,
+        "reads": [
+          "state:epoch"
+        ],
+        "writes": [
+          "state:epoch",
+          "state:root"
+        ],
+        "effects": [],
+        "unknown": false,
+        "bounded": true,
+        "maximumDirectInvocations": 0,
+        "blockLayout": {
+          "blockSize": 3,
+          "slots": [
+            {
+              "kind": "master",
+              "offset": 0
+            },
+            {
+              "kind": "dataNft",
+              "offset": 1,
+              "nftIndex": 0
+            },
+            {
+              "kind": "readOnlyDataNft",
+              "offset": 2,
+              "slotIndex": 0
+            }
+          ]
+        }
+      },
+      {
+        "id": 1,
+        "name": "claim",
+        "arity": 5,
+        "entryPoint": true,
+        "selector": "edbd25fc",
+        "calls": [],
+        "closure": [
+          1
+        ],
+        "component": 1,
+        "recursive": false,
+        "reads": [
+          "collection:claimed:*",
+          "state:root"
+        ],
+        "writes": [
+          "collection:claimed:*"
+        ],
+        "effects": [],
+        "unknown": false,
+        "bounded": true,
+        "maximumDirectInvocations": 0,
+        "tokenContainerAccesses": [
+          {
+            "keyParam": "category",
+            "operations": [
+              "transfer"
+            ],
+            "transferNftCount": 0
+          }
+        ],
+        "blockLayout": {
+          "blockSize": 6,
+          "slots": [
+            {
+              "kind": "master",
+              "offset": 0
+            },
+            {
+              "kind": "dataNft",
+              "offset": 1,
+              "nftIndex": 0
+            },
+            {
+              "kind": "entry",
+              "offset": 2,
+              "slotIndex": 0
+            },
+            {
+              "kind": "tokenContainer",
+              "offset": 3,
+              "slotIndex": 0
+            },
+            {
+              "kind": "tcTransfer",
+              "offset": 4,
+              "slotIndex": 0
+            },
+            {
+              "kind": "returnEvent",
+              "offset": 5
+            }
+          ]
+        }
+      }
+    ],
+    "components": [
+      {
+        "id": 0,
+        "functions": [
+          0
+        ],
+        "recursive": false
+      },
+      {
+        "id": 1,
+        "functions": [
+          1
+        ],
+        "recursive": false
+      }
+    ]
+  }
+}
