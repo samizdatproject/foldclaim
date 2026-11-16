@@ -1,0 +1,18 @@
+Sun Nov 15 03:00:01 UTC 2026
+team	name	sum(total)	newcredit
+# synthetic fixture, reordered columns
+
+1	alice_bitcoincash:qrh7xndr76r6f948txcrssgftg4za7g90vqy3zca67	16	1600
+2	bob_bitcoincash:zrnlw63d49ht8cg4wlsll2qw4f93pag56vvlmcehyw	59	5900
+1	carol_qzzqua0jcwm295nwrc7sewtsutvcnncrhc90w52u7a	5	500
+3	dave_rig1_bitcoincash:qp83eead72qu3zdpg3dgk2radr7paer33vlj2r52ma	7	700
+3	dave_rig2_bitcoincash:zp83eead72qu3zdpg3dgk2radr7paer33vccea6vyw	1	150
+4	erin_bitcoincash:pqnl0ex4cewsxkynuvryxwj63x403rnwlsjvuxthar	4	400
+4	frank_bitcoincash:r00d0v0c22jx9hlg9ypzuegkqeryanj9g2f0axvxlen6r6uzga4h2gncd0yhy	1	100
+1	grace_bitcoincash:qrk65h6rprm7y680yctxq4j3mqcfpnnjvv8fv7cgpc	8	850
+1	heidi_bitcoincash:qr046fqtxdv5p92vgn0jj0d6sm3lkl0etsdkkd93y6	0	80
+5	heidi_bitcoincash:qr046fqtxdv5p92vgn0jj0d6sm3lkl0etsdkkd93y6	0	30
+0	Anonymous	48	98765432109876999999
+6	mallory_bitcoincash:qrh7xndr76r6f948txcrssgftg4za7g90vqy3zca68	777	77777
+6	tester_bchtest:qrawgl6nhs2qh4t3fxj5rkyck8mux44ywu5hruaezq	555	55555
+7	folding_fan_42	90	9000

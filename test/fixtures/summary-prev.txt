@@ -1,0 +1,14 @@
+Sat Nov 14 03:00:01 UTC 2026
+name	newcredit	sum(total)	team
+alice_bitcoincash:qrh7xndr76r6f948txcrssgftg4za7g90vqy3zca67	1000	10	1
+bob_bitcoincash:zrnlw63d49ht8cg4wlsll2qw4f93pag56vvlmcehyw	5000	50	2
+carol_qzzqua0jcwm295nwrc7sewtsutvcnncrhc90w52u7a	200	2	1
+dave_rig1_bitcoincash:qp83eead72qu3zdpg3dgk2radr7paer33vlj2r52ma	300	3	3
+frank_bitcoincash:r00d0v0c22jx9hlg9ypzuegkqeryanj9g2f0axvxlen6r6uzga4h2gncd0yhy	100	1	4
+grace_bitcoincash:qrk65h6rprm7y680yctxq4j3mqcfpnnjvv8fv7cgpc	900	9	1
+heidi_bitcoincash:qr046fqtxdv5p92vgn0jj0d6sm3lkl0etsdkkd93y6	50	0	1
+heidi_bitcoincash:qr046fqtxdv5p92vgn0jj0d6sm3lkl0etsdkkd93y6	10	0	5
+Anonymous	98765432109876543210	440	0
+mallory_bitcoincash:qrh7xndr76r6f948txcrssgftg4za7g90vqy3zca68	0	0	6
+tester_bchtest:qrawgl6nhs2qh4t3fxj5rkyck8mux44ywu5hruaezq	0	0	6
+folding_fan_42	4000	40	7

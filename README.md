@@ -154,6 +154,12 @@ So:
   - Off-chain. Each epoch publishes the SHA-256 of the two F@H files it was built from.
   - Anyone can rebuild the root with `scripts/build-epoch.ts --verify` within the 144-block window.
   - On-chain, the contract only checks Merkle membership and the timelock.
+- **Points rule and its limit.** Points for an epoch are an address's credit in the newer snapshot minus its
+  credit in the older one, floored at 0. The budget is split by points, using integer floors, with the remainder
+  handed out deterministically so the total is exact. Epochs must chain: `build-epoch` refuses a starting
+  snapshot that is not the one the previous epoch ended on. Known limit: if a user's credit dips in one snapshot
+  and then recovers, the recovered points are counted again. A per-address high-water mark carried in the epoch
+  file would fix this.
 - **Not built (yet).**
   - The optional operator push path behind a long timelock.
   - Sharding the pool across several UTXOs.
