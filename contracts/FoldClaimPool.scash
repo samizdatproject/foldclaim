@@ -1,0 +1,58 @@
+pragma solidcash ^0.51.0;
+
+interface IRootRegistry {
+    public bytes32 activeRoot;
+    public int activeEpoch;
+    public bytes32 pendingRoot;
+    public int pendingEpoch;
+}
+
+// FoldClaimPool: pull-based reward claims for a CashToken (FoldingCash FLDCH).
+//
+// The pool holds the reward tokens in a token container and pays any leaf of the active Merkle root of
+// (recipient locking bytecode, cumulative earned). Anyone can submit a claim; tokens always go to the
+// leaf's own locking bytecode, so a relayer can claim for a user but never redirect the payout.
+// `claimed` is a verified mapping: one entry NFT per recipient records the cumulative total already paid
+// (the receipt), so a claim pays only the difference and can never be repeated. Roots come from a
+// RootRegistry, where each new root waits out a public audit window before it can be used.
+contract FoldClaimPool(bytes32 rewardCategory, address registry) {
+    bytes32 root;
+    int epoch;
+
+    mapping(address => bigint) public claimed;
+
+    // Copy the registry's active root. Allowed only when the registry has nothing pending, so a
+    // sync can never reset the registry's audit-window timer.
+    function syncRoot() {
+        int active = IRootRegistry(registry).activeEpoch;
+        require(IRootRegistry(registry).pendingEpoch == active, "registry has a pending root");
+        require(active > this.epoch, "already in sync");
+        this.root = IRootRegistry(registry).activeRoot;
+        this.epoch = active;
+    }
+
+    function claim(bytes32 category, address recipient, bigint cumulative, bytes proof, int index) {
+        require(category == rewardCategory, "wrong token");
+        bytes32 node = sha256(0x00 + bytes(recipient) + toPaddedBytes(cumulative, 8));
+        int depth = proof.length / 32;
+        require(proof.length == depth * 32, "bad proof length");
+        require(depth <= 24, "proof too deep");
+        int position = index;
+        for (int k = 0; k < depth; k++) {
+            bytes32 sibling = bytes32(proof.slice(k * 32, k * 32 + 32));
+            if (position % 2 == 0) {
+                node = sha256(0x01 + node + sibling);
+            } else {
+                node = sha256(0x01 + sibling + node);
+            }
+            position = position / 2;
+        }
+        require(position == 0, "index out of range");
+        require(node == this.root, "not in the active root");
+
+        bigint already = this.claimed[recipient];
+        require(cumulative > already, "nothing to claim");
+        this.claimed[recipient] = cumulative;
+        this.tokens[category].transfer(bytes(recipient), cumulative - already);
+    }
+}

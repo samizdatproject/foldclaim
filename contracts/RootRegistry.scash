@@ -1,0 +1,31 @@
+pragma solidcash ^0.51.0;
+
+// RootRegistry: the timelocked Merkle-root publisher for FoldClaimPool.
+//
+// The operator proposes a root for a new epoch. It becomes active only after the registry has stayed
+// untouched for ROOT_DELAY blocks (a relative timelock on the registry's own UTXOs), so watchers have that
+// long to recompute the root from the public Folding@home data and raise the alarm. Activation is
+// permissionless. The pool copies the active root, and only while nothing is pending, so no one can keep
+// resetting the delay by reading the registry.
+contract RootRegistry(pubkey operator) {
+    int constant ROOT_DELAY = 144;   // blocks, about one day
+
+    bytes32 public activeRoot;
+    int public activeEpoch;
+    bytes32 public pendingRoot;
+    int public pendingEpoch;
+
+    function proposeRoot(sig s, bytes32 root, int epoch) {
+        require(checkSig(s, operator));
+        require(epoch > this.activeEpoch, "epoch must increase");
+        this.pendingRoot = root;
+        this.pendingEpoch = epoch;
+    }
+
+    function activateRoot() {
+        require(this.pendingEpoch > this.activeEpoch, "nothing pending");
+        require(this.age >= ROOT_DELAY, "root still in its audit window");
+        this.activeRoot = this.pendingRoot;
+        this.activeEpoch = this.pendingEpoch;
+    }
+}
