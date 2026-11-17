@@ -12,6 +12,8 @@ reward. FoldClaim turns this around:
 
 It is live on **BCH mainnet** with a test token: real contracts, a real 144-block audit window and real claims.
 
+**Demo page:** https://samizdatproject.github.io/foldclaim/ (live contract state, address lookup, proof check, claim command).
+
 ## How it works
 
 ```
