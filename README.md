@@ -58,7 +58,7 @@ It is live on **BCH mainnet** with a test token: real contracts, a real 144-bloc
 | `src/snapshot.ts`, `scripts/build-epoch.ts` | F@H daily summary → points delta → token allocation → cumulative leaves → root, plus `--verify` for watchers |
 | `src/steps.ts`, `scripts/run.ts` | Resumable deployment and demo steps (each records its txid before anything else can fail) |
 | `scripts/claim.ts` | Claim for any address in a published epoch file; the user's own key or a relayer pays the fee |
-| `src/relative-lock.ts` | Sets the master input's nSequence for `this.age` (SolidCash 0.51 has no option for it yet; fix prepared upstream) |
+| `src/relative-lock.ts` | Sets the master input's nSequence for `this.age` (SolidCash 0.51 has no option for it yet; fix proposed upstream in [solidcash#4](https://github.com/solidcash/solidcash/pull/4)) |
 | `deployments/mainnet/` | State, compiled artifacts, the epoch files (the static proof endpoint) and public info |
 | `test/` | Solidhat tests: contracts, forged claims, the mainnet rehearsal, Merkle depth |
 
