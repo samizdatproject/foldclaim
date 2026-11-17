@@ -2,7 +2,7 @@
 // rehearsal test) and on a real network (scripts/run.ts). Every step writes what it did to a state file before the
 // next one starts, and refuses to run twice, so a crash never loses a contract's category or repeats a broadcast.
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { basename, dirname, join } from 'node:path';
 import { binToHex, hexToBin } from '@bitauth/libauth';
 import { compileFile } from '@solidcash/solidc';
 import { SignatureTemplate, TransactionBuilder } from '@solidcash/solidcash';
@@ -148,7 +148,7 @@ export async function propose(ctx: Ctx, epoch: number) {
   // A proposal restarts the 144-block audit window, so never send one that is already pending on-chain.
   const onChain = await r.getState();
   if (BigInt(onChain.pendingEpoch) === BigInt(epoch) && binToHex(onChain.pendingRoot) === binToHex(tree.root)) {
-    s.steps[key] = { root: binToHex(tree.root), treeFile: file, recovered: true };
+    s.steps[key] = { root: binToHex(tree.root), treeFile: basename(file), recovered: true };
     save(ctx, s);
     say(ctx, `${key}: already pending on-chain; recorded without sending again`);
     return;
@@ -156,7 +156,7 @@ export async function propose(ctx: Ctx, epoch: number) {
   const before = await balance(ctx);
   const result = await r.connect(ctx.operator).call
     .proposeRoot(new SignatureTemplate(ctx.operator.privateKey), tree.root, BigInt(epoch)).send();
-  s.steps[key] = { root: binToHex(tree.root), treeFile: file, txid: result.txid };
+  s.steps[key] = { root: binToHex(tree.root), treeFile: basename(file), txid: result.txid };
   save(ctx, s);
   s.steps[key].height = await ctx.provider.getBlockHeight();
   save(ctx, s);
