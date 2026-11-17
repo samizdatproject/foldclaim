@@ -1,0 +1,73 @@
+# systemd unit for the FoldClaim demo relayer: the bundle dist/relay.mjs (npm run relay:build) on the system Node 20+.
+# Install as /etc/systemd/system/foldclaim-relay.service (Ubuntu 24.04, systemd 255). See deploy/README-relay.md.
+# /opt/foldclaim is root:root and not writable by the service user. The relayer key is root-only in
+# /etc/foldclaim/relayer.wif and reaches the service as a credential, never through the environment.
+[Unit]
+Description=FoldClaim demo relayer
+Documentation=https://github.com/samizdatproject/foldclaim/blob/main/deploy/README-relay.md
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=600
+StartLimitBurst=10
+
+[Service]
+Type=simple
+User=foldclaim
+Group=foldclaim
+WorkingDirectory=/opt/foldclaim
+EnvironmentFile=/opt/foldclaim/relay.env
+LoadCredential=relayer.wif:/etc/foldclaim/relayer.wif
+# Do not set RELAYER_WIF_FILE in relay.env: EnvironmentFile= would override this line.
+Environment=RELAYER_WIF_FILE=%d/relayer.wif
+ExecStart=/usr/bin/node dist/relay.mjs
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=15s
+
+# Resources (the bundle measured about 67 MB RSS on the server; about 115-135 MB on macOS).
+MemoryMax=256M
+MemorySwapMax=0
+CPUQuota=50%
+TasksMax=64
+LimitNOFILE=4096
+
+# Logging: one line per request; rate-limited so a flood cannot fill the journal.
+LogRateLimitIntervalSec=30s
+LogRateLimitBurst=300
+
+# Sandbox. The relay writes no files (logs go to the journal), so there are no ReadWritePaths: with
+# ProtectSystem=strict the whole tree is read-only to it.
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+# PrivateUsers=true runs the service in a user namespace. systemd sets credentials up before entering it, and it does
+# not affect networking, but this combination is untested here: if the unit fails with status 243/CREDENTIALS or
+# cannot read %d/relayer.wif, remove this line first.
+PrivateUsers=true
+ProtectProc=invisible
+ProcSubset=pid
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+ProtectClock=true
+ProtectHostname=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+RemoveIPC=true
+LockPersonality=true
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallFilter=~@privileged
+SystemCallErrorNumber=EPERM
+CapabilityBoundingSet=
+AmbientCapabilities=
+UMask=0077
+# Not set: MemoryDenyWriteExecute (breaks the V8 JIT).
+
+[Install]
+WantedBy=multi-user.target

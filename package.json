@@ -10,7 +10,8 @@
     "solidhat:deploy": "solidhat deploy",
     "solidhat:clean": "solidhat clean",
     "web:build": "node web/build.mjs",
-    "web:test": "node --experimental-transform-types --no-warnings --test web/test/lookup.test.mjs"
+    "web:test": "node --experimental-transform-types --no-warnings --test web/test/lookup.test.mjs",
+    "relay:build": "esbuild relay/server.ts --bundle --platform=node --format=esm --packages=external --target=node20 --outfile=dist/relay.mjs"
   },
   "keywords": [],
   "author": "",
@@ -19,13 +20,14 @@
   "type": "module",
   "private": true,
   "devDependencies": {
-    "@solidcash/solidc": "^0.51.0",
     "@solidcash/solidhat": "^0.51.0",
-    "vitest": "^5.0.4",
+    "esbuild": "^0.28.2",
     "typescript": "^5.9.2",
-    "esbuild": "^0.28.2"
+    "vitest": "^5.0.4"
   },
   "dependencies": {
-    "@solidcash/solidcash": "^0.51.0"
+    "@noble/curves": "^1.2.0",
+    "@solidcash/solidcash": "^0.51.0",
+    "@solidcash/solidc": "^0.51.0"
   }
 }

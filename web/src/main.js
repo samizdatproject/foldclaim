@@ -1,6 +1,7 @@
 // FoldClaim status page. Static data comes from web/data/ (copied from deployments/mainnet by web/build.mjs);
 // live data comes from public Fulcrum servers over WSS and, lazily, from the SolidCash SDK (./live.js).
 import { parseAddress, findLeaf, checkLeaf } from './lookup.js';
+import { canRelay, relayClaim } from './relay.js';
 import { Fulcrum } from './fulcrum.js';
 
 const ROOT_DELAY = 144;
@@ -152,6 +153,32 @@ function claimCommand(address) {
   return `node --experimental-transform-types --no-warnings scripts/claim.ts mainnet deployments/mainnet/tree-epoch${S.tree.epoch}.json ${address} --payer <your-wif-file>`;
 }
 
+/** The relayed claim (fee paid by the demo relayer); the result shows a txid link or the relay's error text. */
+function relayBox(address) {
+  const result = el('p', { class: 'small', 'aria-live': 'polite' });
+  const button = el('button', { type: 'button', class: 'claim' }, 'Claim now (fee paid by the demo relayer)');
+  button.addEventListener('click', async () => {
+    button.disabled = true;
+    result.className = 'small muted';
+    result.textContent = 'Sending the claim…';
+    const r = await relayClaim(S.relay.url, address);
+    if (r.txid) {
+      result.className = 'small good';
+      result.replaceChildren('Claimed: ', el('a', { href: EXPLORER(r.txid), rel: 'noopener noreferrer', target: '_blank' }, code(short(r.txid, 10), r.txid)));
+      return;
+    }
+    result.className = 'small badtext';
+    result.textContent = `Not claimed: ${r.error}`;
+    button.disabled = false;
+  });
+  return [
+    el('h3', {}, 'Claim now'),
+    el('p', { class: 'small muted' }, 'For the demo recipients only, a demo relayer submits the claim and pays the fee. The tokens still go to the leaf address; nothing is asked of you.'),
+    button,
+    result,
+  ];
+}
+
 function copyButton(text) {
   const button = el('button', { type: 'button', class: 'copy' }, 'Copy');
   button.addEventListener('click', async () => {
@@ -181,6 +208,7 @@ async function lookup(input) {
     const check = await checkLeaf(tree, leaf);
     if (seq !== lookupSeq) return;
     const cmd = claimCommand(parsed.tokenAware);
+    const relayed = canRelay({ relay: S.relay, pub: S.pub, tree, leaf, lockHex: parsed.lockHex, livePoolRoot: S.live?.pool.root });
     out.replaceChildren(
       el('p', { class: 'verdict ok' }, `Leaf ${leaf.index} of epoch ${tree.epoch}: cumulative ${leaf.cumulative} test-token units.`),
       forms,
@@ -194,7 +222,8 @@ async function lookup(input) {
       heldBlock,
       el('h3', {}, 'Proof'),
       el('pre', { class: 'hex' }, leaf.proof),
-      el('h3', {}, 'Claim command'),
+      ...(relayed ? relayBox(parsed.tokenAware) : []),
+      el('h3', {}, relayed ? 'Or claim yourself' : 'Claim command'),
       el('p', { class: 'small muted' }, 'Run it in a clone of the FoldClaim repository. The WIF file is your own key on your own machine and only pays the fee; the tokens always go to the leaf address. Never paste a key into a web page, including this one.'),
       el('div', { class: 'cmd' }, el('pre', {}, cmd), copyButton(cmd)),
     );
@@ -223,6 +252,7 @@ async function main() {
     S.meta = await getJson('data/meta.json');
     const latest = Math.max(...S.meta.epochs);
     [S.state, S.pub, S.tree] = await Promise.all([getJson('data/state.json'), getJson('data/public.json'), getJson(`data/tree-epoch${latest}.json`)]);
+    S.relay = S.meta.relay ? await getJson('data/relay.json').catch(() => null) : null;
   } catch (e) {
     $('status-source').textContent = `Could not load the page data: ${e.message}`;
     return;

@@ -7,3 +7,4 @@ secrets/
 web/dist/
 web/data/
 deployments/*/autopilot.log
+dist/

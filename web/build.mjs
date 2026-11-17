@@ -1,7 +1,9 @@
 // Build the static FoldClaim page: copy the public deployment data into web/data/ (whitelisted fields only) and
 // bundle web/src/main.js and web/src/live.js (the SolidCash SDK, loaded lazily) into web/dist/.
 //   node web/build.mjs        (or: npm run web:build)
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync } from 'node:fs';
+// Optional demo relayer (the page's "Claim now" button): RELAY_URL=https://... or deployments/mainnet/relay.json
+// {"url": "https://..."}. It is written to web/data/relay.json and its origin is added to the page CSP connect-src.
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { build } from 'esbuild';
 
@@ -13,9 +15,28 @@ const read = (name) => JSON.parse(readFileSync(new URL(name, src), 'utf8'));
 const write = (name, value) => writeFileSync(new URL(name, data), JSON.stringify(value));
 const git = (...args) => { try { return execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim(); } catch { return ''; } };
 
+// The relayer URL (optional): https only (http allowed for localhost while testing), no trailing slash.
+let relayUrl = process.env.RELAY_URL ?? (existsSync(new URL('relay.json', src)) ? read('relay.json').url : '');
+if (relayUrl) {
+  const u = new URL(relayUrl);
+  const local = u.protocol === 'http:' && ['localhost', '127.0.0.1', '[::1]'].includes(u.hostname);
+  if (u.protocol !== 'https:' && !local) throw new Error(`relay URL must be https: ${relayUrl}`);
+  if (u.search || u.hash || u.username || u.password) throw new Error(`relay URL must be a plain base URL: ${relayUrl}`);
+  relayUrl = u.href.replace(/\/+$/, '');
+}
+
 rmSync(data, { recursive: true, force: true });
 rmSync(new URL('dist/', web), { recursive: true, force: true });
 mkdirSync(data, { recursive: true });
+
+if (relayUrl) write('relay.json', { url: relayUrl });
+// The page CSP allows connections to the relay's origin only when one is configured (idempotent rewrite).
+const indexUrl = new URL('index.html', web);
+const html = readFileSync(indexUrl, 'utf8');
+const connectSrc = `connect-src 'self' wss:${relayUrl ? ` ${new URL(relayUrl).origin}` : ''};`;
+const newHtml = html.replace(/connect-src [^;"]*;/, connectSrc);
+if (!newHtml.includes(connectSrc)) throw new Error('web/index.html: no CSP connect-src to update');
+if (newHtml !== html) writeFileSync(indexUrl, newHtml);
 
 // state.json: keep only public on-chain facts (it also holds local paths, which must not be published).
 const STEP_KEYS = ['categoryId', 'lockingBytecode', 'category', 'root', 'epoch', 'txid', 'height'];
@@ -47,7 +68,7 @@ for (const name of ['FoldClaimPool', 'RootRegistry']) write(`${name}.artifact.js
 // Only the files this page publishes count (the live process also writes a log there).
 const copied = ['state.json', 'public.json', 'FoldClaimPool.artifact.json', 'RootRegistry.artifact.json', ...epochs.map((n) => `tree-epoch${n}.json`)];
 const dirty = git('status', '--porcelain', '--', ...copied.map((f) => `deployments/mainnet/${f}`)) !== '';
-write('meta.json', { commit: git('rev-parse', '--short', 'HEAD') || 'unknown', dirty, builtAt: new Date().toISOString(), epochs });
+write('meta.json', { commit: git('rev-parse', '--short', 'HEAD') || 'unknown', dirty, builtAt: new Date().toISOString(), epochs, relay: Boolean(relayUrl) });
 
 // Two bundles: the page (small, one file) and the SolidCash SDK reader (large, fetched with import() after the page
 // renders). The SDK bundle must keep code splitting: inlined into one file, libauth's top-level await deadlocks.
@@ -61,3 +82,4 @@ const sdkBytes = Object.entries(outputs).filter(([f]) => f.includes('/sdk/')).re
 console.log(`web/dist/main.js  ${(outputs[Object.keys(outputs).find((f) => f.endsWith('dist/main.js'))].bytes / 1024).toFixed(1)} KB`);
 console.log(`web/dist/sdk/     ${(sdkBytes / 1024).toFixed(1)} KB in ${Object.keys(outputs).filter((f) => f.includes('/sdk/')).length} files (lazy)`);
 console.log(`data: epochs ${epochs.join(', ')}, commit ${git('rev-parse', '--short', 'HEAD')}${dirty ? ' (deployments/mainnet has uncommitted changes)' : ''}`);
+console.log(relayUrl ? `relay: ${relayUrl} (CSP connect-src ${new URL(relayUrl).origin})` : 'relay: none (no Claim button)');

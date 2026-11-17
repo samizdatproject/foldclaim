@@ -104,6 +104,7 @@ pre.hex { font-size: 0.78rem; max-height: 12em; overflow-y: auto; }
 .cmd { display: flex; gap: 8px; align-items: flex-start; }
 .cmd pre { flex: 1; min-width: 0; }
 button.copy { padding: 6px 10px; font-size: 0.875rem; }
+button:disabled { opacity: 0.6; cursor: progress; }
 
 .how { padding-left: 20px; }
 .how li { margin: 6px 0; }

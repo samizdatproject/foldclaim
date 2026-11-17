@@ -58,6 +58,8 @@ It is live on **BCH mainnet** with a test token: real contracts, a real 144-bloc
 | `src/snapshot.ts`, `scripts/build-epoch.ts` | F@H daily summary → points delta → token allocation → cumulative leaves → root, plus `--verify` for watchers |
 | `src/steps.ts`, `scripts/run.ts` | Resumable deployment and demo steps (each records its txid before anything else can fail) |
 | `scripts/claim.ts` | Claim for any address in a published epoch file; the user's own key or a relayer pays the fee |
+| `src/pool.ts` | Re-attaches the registry and pool from `deployments/<net>/` and sends a claim (shared by `claim.ts` and the relayer) |
+| `relay/server.ts`, `deploy/` | The demo relayer behind the page's Claim button, with its systemd unit, nginx config and deploy steps |
 | `src/relative-lock.ts` | Sets the master input's nSequence for `this.age` (SolidCash 0.51 has no option for it yet; fix proposed upstream in [solidcash#4](https://github.com/solidcash/solidcash/pull/4)) |
 | `deployments/mainnet/` | State, compiled artifacts, the epoch files (the static proof endpoint) and public info |
 | `test/` | Solidhat tests: contracts, forged claims, the mainnet rehearsal, Merkle depth |
@@ -101,6 +103,43 @@ node --experimental-transform-types --no-warnings scripts/claim.ts mainnet deplo
 ```
 
 The code is network-agnostic. `scripts/run.ts chipnet …` runs the same steps on chipnet.
+
+## Relayer
+
+`relay/server.ts` is a small demo relayer behind the demo page's **Claim now** button. It submits a claim and pays
+the fee from its own key (`secrets/mainnet-relayer.wif`), so a visitor can watch a claim land without a wallet.
+
+- **Tokens always go to the leaf address.** The address is in the leaf hash and the contract pays only that locking
+  bytecode. The relayer chooses only who pays the fee.
+- **Demo recipients only.** It relays only the addresses in `public.json` `demoRecipients`. Visitors cannot spend its
+  coins on the 290 synthetic leaves, which nobody can spend.
+- **Checks before it pays, cheapest first.** For each request it:
+  1. normalizes the address (`q…`/`z…`, with or without `bitcoincash:`, mainnet only);
+  2. checks the allowlist, with no network or disk access;
+  3. applies the rate limit;
+  4. finds the leaf in the epoch file whose root equals the pool's current root (files cached by name and mtime);
+  5. checks the proof locally, then sends the claim.
+
+  Leaves already paid under the current root are answered `nothing to claim` from memory. Claims run one at a time,
+  because they all spend the pool's master UTXO. At most 5 wait (`busy, try again shortly`), and each is bounded by
+  90 s, like every Electrum call.
+- **Limits.** `PER_IP_PER_HOUR=3` requests to `/claim` per client, with IPv6 counted per /64. These count only
+  requests for demo recipients, refused ones included, so three `nothing to claim` answers use up the hour. On top
+  of that, `DAILY_CAP=12` successful claims per UTC day. The body may be at most 1 KB and
+  must be JSON. CORS allows only `ALLOWED_ORIGIN`. A leaf that was already paid answers `nothing to claim`. Below
+  12,000 sats the relayer answers `relayer out of funds`.
+- **API.** `GET /health`, `GET /status` (pool and registry epochs and roots, relayer address and balance, claims left
+  today), `POST /claim {"address": "..."}` → `{"txid": ...}` or `{"error": ...}`.
+
+```sh
+NETWORK=mainnet RELAYER_WIF_FILE=secrets/mainnet-relayer.wif node --experimental-transform-types --no-warnings relay/server.ts
+npm run relay:build && NETWORK=mainnet RELAYER_WIF_FILE=... node dist/relay.mjs   # the deployed form (Node 20+)
+RELAY_URL=https://<relay-host> npm run web:build    # shows the button and adds the relay to the page CSP
+```
+
+The command-line claim (`scripts/claim.ts --payer <your-wif-file>`) remains the self-paid option. Deployment steps
+(systemd, nginx, certbot) are in [`deploy/README-relay.md`](deploy/README-relay.md). `test/relay.test.ts` runs the
+relayer against a mock deployment.
 
 ## Cost
 
