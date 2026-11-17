@@ -1,0 +1,1 @@
+import{S as u}from"./chunk-UOPBVOHG.js";import{Sd as c,_d as f}from"./chunk-53CH5YIN.js";import{c as r}from"./chunk-5GXNOZCN.js";function m(o,e,t=!1){let n=f(e,t);return u(c(r(o),n),"p2sh32")}function d(o,e){let t=o;for(let n=1;;n+=1){let i=e(n);if(i===void 0||i==="")return t;t+=i}}export{m as a,d as b};

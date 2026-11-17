@@ -1,0 +1,1 @@
+import{c as n}from"./chunk-KBRUHIEI.js";var e={baseInstructionCost:100,maximumFunctionIdentifierLength:7,maximumMemorySlots:1e3,maximumStandardLockingBytecodeLength:201,maximumStandardUnlockingBytecodeLength:1e4,maximumTokenCommitmentLength:128},t={...n,...e};export{t as a};
