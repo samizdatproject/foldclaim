@@ -4,3 +4,6 @@ typechain-types/
 cache/
 .env
 secrets/
+web/dist/
+web/data/
+deployments/*/autopilot.log

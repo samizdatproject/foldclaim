@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; connect-src 'self' wss:; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="FoldClaim: pull-based CashToken reward claims on Bitcoin Cash mainnet, written in SolidCash.">
+<title>FoldClaim</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+<script type="module" src="dist/main.js"></script>
+</head>
+<body>
+<header class="wrap-page">
+  <h1>FoldClaim</h1>
+  <p class="lead">FoldClaim is a pull-based reward pool for CashTokens on Bitcoin Cash, written in SolidCash: the operator publishes one Merkle root per epoch instead of pushing one output per user. Each recipient claims whenever they like, pays only their own fee, and the contract tracks what was already paid, so nobody needs a receipt NFT.</p>
+  <p class="notice"><strong>Test token on mainnet, not real FLDCH.</strong> The contracts and the 144-block audit window are real and live on BCH mainnet; the reward token is a worthless test token.</p>
+  <h2>Mainnet deployment</h2>
+  <ul id="deploy-txs" class="txs"></ul>
+  <dl id="categories" class="cats"></dl>
+  <p id="data-version" class="small muted"></p>
+</header>
+
+<main class="wrap-page">
+  <section aria-labelledby="status-h">
+    <h2 id="status-h">Live status</h2>
+    <p id="status-source" class="small muted">Loading…</p>
+    <div id="status-cards" class="cards"></div>
+    <p id="status-verdict" class="verdict"></p>
+  </section>
+
+  <section aria-labelledby="lookup-h">
+    <h2 id="lookup-h">Look up an address</h2>
+    <form id="lookup-form" class="lookup" autocomplete="off">
+      <label for="address">BCH address (q… or z…, with or without <code>bitcoincash:</code>)</label>
+      <div class="row">
+        <input id="address" name="address" type="text" inputmode="text" spellcheck="false" autocapitalize="off" placeholder="bitcoincash:z…">
+        <button type="submit">Look up</button>
+      </div>
+    </form>
+    <details class="demo-box">
+      <summary>Demo recipients</summary>
+      <p class="small muted">Ten leaves pay demo addresses whose keys the project holds, spread across the tree. Click one to fill the field.</p>
+      <ul id="demo-list" class="demo-list"></ul>
+    </details>
+    <div id="lookup-result" class="result" aria-live="polite"></div>
+  </section>
+</main>
+
+<footer class="wrap-page">
+  <h2>How it works</h2>
+  <ul class="how">
+    <li><strong>Cumulative leaves.</strong> Each leaf commits to an address and the total it has earned so far, never a per-epoch amount, so a claim pays the difference, skipping epochs costs nothing and nothing expires.</li>
+    <li><strong>144-block audit window.</strong> A proposed root waits about one day (a relative timelock on the registry) before anyone can activate it, so watchers can rebuild it from the public Folding@home files.</li>
+    <li><strong>Receipts as a verified mapping.</strong> The pool keeps <code>claimed[address]</code> in its own token category; a repeat claim is refused on-chain, and users hold no receipt NFT.</li>
+    <li><strong>Payout bound to the leaf address.</strong> The address is part of the leaf hash and the contract pays only that locking bytecode, so nobody can redirect a claim.</li>
+    <li><strong>Anyone can relay.</strong> The user, a relayer or the operator can submit a claim and pay its fee; activation and sync are permissionless too.</li>
+  </ul>
+  <p class="small muted">Built with Claude Code. Reads public Electrum servers directly from your browser; no trackers, no keys, no backend.</p>
+</footer>
+</body>
+</html>
