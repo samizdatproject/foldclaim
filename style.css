@@ -38,6 +38,8 @@ body {
   overflow-wrap: anywhere;
 }
 .wrap-page { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+.banner { display: flex; flex-wrap: wrap; gap: 6px 16px; justify-content: center; align-items: center; padding: 8px 16px; font-size: 0.85rem; border-bottom: 1px solid color-mix(in srgb, currentColor 15%, transparent); }
+.banner code { font-size: 0.8rem; }
 header { padding-top: 28px; }
 footer { padding-bottom: 40px; border-top: 1px solid var(--border); margin-top: 32px; }
 h1 { font-size: 2rem; margin: 0 0 8px; color: var(--accent); }
