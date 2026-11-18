@@ -79,7 +79,7 @@ units), never real FLDCH.
 | Sync the active root into the pool | `95607cdeee1bcae09757c9b4d9aa99a8fdd509eeaa6e28687331e1cd6d494f11` |
 | Claims, epoch 1: all 10 demo recipients (about 5.4 kB each) | `14e691473f20729ed7f327489ba8672d108f116a213ae548d4cf7b7e6b250ee0`<br>`2adb7db165bd6b26b6dbaff0238ca5a82c1cac100df9f0f6710ec9360c3de8f8`<br>`247d2f19c3cf5f39d8a71c6e5826a4e7d90efb844d7bc4dab5c83fc200fba6fb`<br>`330ad35dd4816f97eea4a5f2142dd0e7477b6485c6123df916b1f7ef45409199`<br>`1375c29278294bb9ca7aebc114d63ffdaef2991cc57d42605e56c2386bf02614`<br>`352046bc0b59f43429dbf67d4e62da6e71fd337ad1a20d04d39018de752aaa22`<br>`62d176d1fc306841aa63468b0df6a364df5326598ba82801572fb085e9ed962c`<br>`69cfb5138c7d19249b45229ea61f24c8ae63daa72c267b6a32e43741d7505c59`<br>`d16362a54800a53c3e52faff9a0844db43dab3a9e11db5d6989c56dc98b74a1d`<br>`29739278a5ce6407b585f9daf2b6bde45534799b5a17447364a654758992c7dd` |
 | Propose epoch 2 (root `6c479d26…df1e9`) | `2fb2e614ae8eb5476fc14bc204732d9bb5304e7935e26203810d11ac265bb407` |
-| Activate epoch 2, top-up claims | follow the next 144-block window; see `deployments/mainnet/state.json` |
+| Epochs 2–7 | one new epoch a day (each adds 500 test-token units to every leaf); the autopilot activates and syncs each after its 144-block window, and the demo recipients claim from the demo page ("Claim now", fee paid by the demo relayer). See `deployments/mainnet/state.json`. |
 
 The demo tree has 300 leaves.
 - **Ten leaves** pay demo recipients whose keys we hold. They are spread across the tree (indexes 0, 1, 42, 99,
@@ -100,7 +100,7 @@ $R status
 $R registry && $R propose 1 && $R token && $R pool
 $R activate 1        # refused until 144 blocks after the proposal confirmed; a refusal costs nothing
 $R sync 1 && $R claim 1 all
-scripts/autopilot.sh mainnet           # or let this retry each step until the demo is complete
+scripts/autopilot.sh mainnet           # or let this retry each step: epochs 1-7, one a day
 
 # a user's claim (any address in the epoch file); --payer <wif-file> pays the fee from the user's own key
 node --experimental-transform-types --no-warnings scripts/claim.ts mainnet deployments/mainnet/tree-epoch1.json <address>
