@@ -75,7 +75,11 @@ units), never real FLDCH.
 | Propose epoch 1 (300 leaves, depth 9, root `f6b2e52e…2b15f`) | `d8ffa816fd0d980872e88ac85621b97f2241d3585cfd916e7b2d4912464266b5` |
 | Test token genesis | `5410e0d9469e127804b0f22787c5c1612f32b372a7472a4e319cb123eb786771` |
 | FoldClaimPool deploy (category `f50d2d3d…ab6a`) | `14ba45c3bc715f66d050062c20de26197ad222292042721101626192c9afa3a6` |
-| Activate, sync, claims, epoch 2 | see `deployments/mainnet/state.json`; they follow the 144-block window |
+| Activate epoch 1 (after the 144-block window) | `bd713e93dc3bd97f0e76002808bc59183d2b7d979b953c358a2258cc609b491f` |
+| Sync the active root into the pool | `95607cdeee1bcae09757c9b4d9aa99a8fdd509eeaa6e28687331e1cd6d494f11` |
+| Claims, epoch 1: all 10 demo recipients (about 5.4 kB each) | `14e691473f20729ed7f327489ba8672d108f116a213ae548d4cf7b7e6b250ee0`<br>`2adb7db165bd6b26b6dbaff0238ca5a82c1cac100df9f0f6710ec9360c3de8f8`<br>`247d2f19c3cf5f39d8a71c6e5826a4e7d90efb844d7bc4dab5c83fc200fba6fb`<br>`330ad35dd4816f97eea4a5f2142dd0e7477b6485c6123df916b1f7ef45409199`<br>`1375c29278294bb9ca7aebc114d63ffdaef2991cc57d42605e56c2386bf02614`<br>`352046bc0b59f43429dbf67d4e62da6e71fd337ad1a20d04d39018de752aaa22`<br>`62d176d1fc306841aa63468b0df6a364df5326598ba82801572fb085e9ed962c`<br>`69cfb5138c7d19249b45229ea61f24c8ae63daa72c267b6a32e43741d7505c59`<br>`d16362a54800a53c3e52faff9a0844db43dab3a9e11db5d6989c56dc98b74a1d`<br>`29739278a5ce6407b585f9daf2b6bde45534799b5a17447364a654758992c7dd` |
+| Propose epoch 2 (root `6c479d26…df1e9`) | `2fb2e614ae8eb5476fc14bc204732d9bb5304e7935e26203810d11ac265bb407` |
+| Activate epoch 2, top-up claims | follow the next 144-block window; see `deployments/mainnet/state.json` |
 
 The demo tree has 300 leaves.
 - **Ten leaves** pay demo recipients whose keys we hold. They are spread across the tree (indexes 0, 1, 42, 99,
