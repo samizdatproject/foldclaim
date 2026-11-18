@@ -16,6 +16,19 @@ const DEPLOY_TXS = [
   ['pool-deploy', 'FoldClaimPool deploy'],
 ];
 
+/** Every later step in state.json order: activations, syncs, claims, proposals (funding-coin splits are left out). */
+function laterTxs(state) {
+  const known = new Set(DEPLOY_TXS.map(([k]) => k));
+  return Object.keys(state.txs).filter((k) => !known.has(k) && !k.endsWith('-coin')).map((k) => {
+    let m;
+    if ((m = k.match(/^activate(\d+)$/))) return [k, `Activate epoch ${m[1]}`];
+    if ((m = k.match(/^sync(\d+)$/))) return [k, `Sync epoch ${m[1]} into the pool`];
+    if ((m = k.match(/^propose(\d+)$/))) return [k, `Propose epoch ${m[1]}`];
+    if ((m = k.match(/^claim(\d+)-(\d+)$/))) return [k, `Claim, epoch ${m[1]}, demo ${m[2]}`];
+    return [k, k];
+  });
+}
+
 const $ = (id) => document.getElementById(id);
 function el(tag, attrs = {}, ...children) {
   const node = document.createElement(tag);
@@ -51,7 +64,7 @@ function committedView(state) {
 
 function renderHeader() {
   const { state, meta } = S;
-  $('deploy-txs').replaceChildren(...DEPLOY_TXS.filter(([k]) => state.txs[k]).map(([k, label]) => {
+  $('deploy-txs').replaceChildren(...[...DEPLOY_TXS, ...laterTxs(state)].filter(([k]) => state.txs[k]).map(([k, label]) => {
     const txid = state.txs[k].txid;
     return el('li', {}, el('span', { class: 'label' }, label), ' ',
       el('a', { href: EXPLORER(txid), rel: 'noopener noreferrer', target: '_blank' }, code(short(txid, 10), txid)), ' ',
