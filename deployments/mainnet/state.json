@@ -96,6 +96,12 @@
     },
     "sync3": {
       "height": 978131
+    },
+    "propose4": {
+      "root": "c810a2767935d8cc224765aa63c89b923e1df0cc898732c31b6604a20ebbcdc7",
+      "treeFile": "tree-epoch4.json",
+      "txid": "ba83d23ab49aef3e0b20a6508bcc99f2ba6953a5e0710263be89da041363dc93",
+      "height": 978156
     }
   },
   "txs": {
@@ -223,6 +229,11 @@
       "txid": "8f24ea7fc5225d9ea4111e9b7e339ea70b2834fd7330caf9800cfeb5c2e3e356",
       "bytes": 4397,
       "spent": "4446"
+    },
+    "propose4": {
+      "txid": "ba83d23ab49aef3e0b20a6508bcc99f2ba6953a5e0710263be89da041363dc93",
+      "bytes": 3179,
+      "spent": "3228"
     }
   }
 }
