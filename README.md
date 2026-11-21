@@ -1,5 +1,7 @@
 # FoldClaim
 
+[![tests](https://github.com/samizdatproject/foldclaim/actions/workflows/test.yml/badge.svg)](https://github.com/samizdatproject/foldclaim/actions/workflows/test.yml)
+
 **Pull-based CashToken reward claims for Bitcoin Cash, written in SolidCash.**
 
 FoldingCash pays Folding@home contributors in FLDCH tokens by pushing one output per user per distribution.
