@@ -126,6 +126,12 @@
       "treeFile": "tree-epoch6.json",
       "txid": "43638cad760ef29d1ce92d4660aff5f678427a8938b4702af9be3429800c0eae",
       "height": 978447
+    },
+    "activate6": {
+      "height": 978599
+    },
+    "sync6": {
+      "height": 978599
     }
   },
   "txs": {
@@ -288,6 +294,16 @@
       "txid": "43638cad760ef29d1ce92d4660aff5f678427a8938b4702af9be3429800c0eae",
       "bytes": 3179,
       "spent": "3228"
+    },
+    "activate6": {
+      "txid": "e2c44658deb0ccb73333479769f089a7eec9adc1be535ec9abd5873895b7eddd",
+      "bytes": 3079,
+      "spent": "3128"
+    },
+    "sync6": {
+      "txid": "ba9bf1c19d1ce7710da5547158eaedcd527e8abc117b81b79997ac4f0600c944",
+      "bytes": 4397,
+      "spent": "4446"
     }
   }
 }
