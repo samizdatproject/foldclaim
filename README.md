@@ -62,7 +62,7 @@ It is live on **BCH mainnet** with a test token: real contracts, a real 144-bloc
 | `scripts/claim.ts` | Claim for any address in a published epoch file; the user's own key or a relayer pays the fee |
 | `src/pool.ts` | Re-attaches the registry and pool from `deployments/<net>/` and sends a claim (shared by `claim.ts` and the relayer) |
 | `relay/server.ts`, `deploy/` | The demo relayer behind the page's Claim button, with its systemd unit, nginx config and deploy steps |
-| `src/relative-lock.ts` | Sets the master input's nSequence for `this.age` (SolidCash 0.51 has no option for it yet; fix proposed upstream in [solidcash#4](https://github.com/solidcash/solidcash/pull/4)) |
+| `src/relative-lock.ts` | Sets the master input's nSequence for `this.age` (SolidCash 0.51 has no option for it; our fix was merged upstream in [solidcash#4](https://github.com/solidcash/solidcash/pull/4), and this shim goes once a release includes it) |
 | `deployments/mainnet/` | State, compiled artifacts, the epoch files (the static proof endpoint) and public info |
 | `test/` | Solidhat tests: contracts, forged claims, the mainnet rehearsal, Merkle depth |
 
